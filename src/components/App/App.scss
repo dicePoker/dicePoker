@@ -1,0 +1,12 @@
+$bg-color: #bbcbd6;
+$box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.16);
+
+.App {
+  padding: 20px;
+  background-color: $bg-color;
+  color: red;
+  box-shadow: $box-shadow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
