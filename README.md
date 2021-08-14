@@ -1,3 +1,5 @@
+Проект на Heroku: [houston-dice-poker.herokuapp.com](https://houston-dice-poker.herokuapp.com/)
+
 ## Установка
 
 - `npm install` — установка стабильной версии,
