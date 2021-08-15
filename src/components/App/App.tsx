@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import MaterialDemo from '../MaterialDemo/MaterialDemo';
 import './App.scss';
 
 class App extends Component {
@@ -6,6 +7,7 @@ class App extends Component {
         return (
             <div className='App'>
                 <h1>Test App</h1>
+                <MaterialDemo />
             </div>
         );
     }
