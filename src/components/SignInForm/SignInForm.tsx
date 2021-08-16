@@ -3,7 +3,7 @@ import {
   Button, FormControl, Link, TextField,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import './signInForm.scss';
+import './SignInForm.scss';
 
 const useStyles = makeStyles((theme) => ({
   link: {
