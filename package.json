@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build && node ./server.js",
     "build": "webpack --mode production",
-    "heroku-prebuild": "npm install --dev"
+    "heroku-prebuild": "npm install --dev",
+    "dev": "webpack serve "
   },
   "keywords": [],
   "author": "",

@@ -12,6 +12,7 @@ module.exports = {
         compress: true,
         open: true,
         hot: true,
+        watchContentBase: true,
         port: process.env.PORT || 8080,
     },
     module: {
