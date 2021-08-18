@@ -1,21 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import {FormControl, Button, TextField, Link} from "@material-ui/core";
 import './SignUpForm.scss'
-
-const useStyles = makeStyles((theme) => ({
-  link: {
-    marginTop: theme.spacing(6),
-    textAlign: 'center'
-  },
-  button: {
-    margin: 'auto',
-    marginTop: theme.spacing(6),
-    width: '144px'
-  }
-
-
-}));
+import { useStyles } from '../../utils/makeStyles';
 
 export const SignUpForm = (): JSX.Element =>  {
   const classes = useStyles();
@@ -29,7 +15,7 @@ export const SignUpForm = (): JSX.Element =>  {
         <TextField name="phone" type="tel"  label="Телефон"/>
         <TextField name="login" type="text"  label="Логин"/>
         <TextField name="password" type="password"  label="Пароль"/>
-        <Button variant="contained" size="medium" color="primary" className={classes.button} >Регистрация</Button>
+        <Button variant="contained" size="medium" color="primary" className={classes.buttonSignUpForm}>Регистрация</Button>
       </FormControl>
       <Link href="#" className={classes.link} onClick={(e)=> e.preventDefault()}>
         Уже есть аккаунт?
