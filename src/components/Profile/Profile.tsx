@@ -17,18 +17,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ProfilePage(): JSX.Element {
+export default function Profile(): JSX.Element {
   const classes = useStyles();
 
   return (
-    <section className="profile-page">
+    <section className="profile">
       <Grid
         container
         direction="column"
         justifyContent="center"
         alignItems="center"
       >
-        <h1 className="profile-page__title">Профиль</h1>
+        <h1 className="profile__title">Профиль</h1>
         <Avatar className={classes.large}>H</Avatar>
         <FormControl component="form">
           <TextField
@@ -57,7 +57,7 @@ export default function ProfilePage(): JSX.Element {
             }}
           />
           <TextField
-            name="firsst_name"
+            name="first_name"
             label="Имя"
             defaultValue="User name"
             InputProps={{
