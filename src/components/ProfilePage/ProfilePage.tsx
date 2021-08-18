@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  FormControl, Link, TextField, Grid,
+  FormControl, Link, TextField, Grid, Avatar,
 } from '@material-ui/core';
 import React from 'react';
 
@@ -9,6 +9,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(6),
     textAlign: 'center',
     color: '#1769AA',
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginBottom: theme.spacing(4),
   },
 }));
 
@@ -23,7 +28,8 @@ export default function ProfilePage(): JSX.Element {
         justifyContent="center"
         alignItems="center"
       >
-        <div className="profile-page__img-wrapper" />
+        <h1 className="profile-page__title">Профиль</h1>
+        <Avatar className={classes.large}>H</Avatar>
         <FormControl component="form">
           <TextField
             name="login"
