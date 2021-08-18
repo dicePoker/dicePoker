@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function SignUpForm(): JSX.Element {
+export const SignUpForm = (): JSX.Element =>  {
   const classes = useStyles();
   return (
     <div className="sign-up-form">
