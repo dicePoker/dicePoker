@@ -10,7 +10,7 @@
     "start": "npm run build && node ./server.js",
     "build": "webpack --mode production",
     "heroku-prebuild": "npm install --dev",
-    "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore",
+    "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore . && stylelint \"**/*.scss\" --fix  --config .stylelintrc.json",
     "precommit:hook": "npm run lint",
     "dev": "webpack serve "
   },
