@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import classnames from 'classnames';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,11 +11,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ContainedButtons() {
+type Props = {
+  className?: string
+}
+
+const ContainedButtons: React.FC<Props> = ({className}) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div className={classnames(classes.root, className)}>
       <Button variant="contained">Default</Button>
       <Button variant="contained" color="primary">
         Primary
@@ -31,3 +36,5 @@ export default function ContainedButtons() {
     </div>
   );
 }
+
+export default ContainedButtons
