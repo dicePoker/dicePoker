@@ -1,6 +1,6 @@
-import React from "react";
-import { Button, FormControl, Link, TextField } from "@material-ui/core";
-import "./SignInForm.scss";
+import React from 'react';
+import { Button, FormControl, Link, TextField } from '@material-ui/core';
+import './SignInForm.scss';
 import { useStyles } from '../../utils/makeStyles';
 
 export const SignInForm = (): JSX.Element => {
@@ -29,7 +29,7 @@ export const SignInForm = (): JSX.Element => {
       >
         Регистрация
       </Button>
-      <Link className={classes.link} onClick={(e) => e.preventDefault()}>
+      <Link className={classes.link} onClick={e => e.preventDefault()}>
         Уже есть аккаунт?
       </Link>
     </div>

@@ -11,7 +11,10 @@
     "build": "webpack --mode production",
     "heroku-prebuild": "npm install --dev",
     "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore . && stylelint \"**/*.scss\" --fix  --config .stylelintrc.json",
-    "precommit:hook": "npm run lint"
+    "precommit:hook": "npm run format",
+    "dev": " webpack serve",
+    "prettier": "prettier --write \"**/*.{ts,js,jxs,tsx,json,scss}\"",
+    "format": "npm run prettier && npm run lint"
   },
   "keywords": [],
   "author": "",
@@ -30,7 +33,9 @@
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "html-webpack-plugin": "^5.3.2",
     "node-sass": "^6.0.1",
@@ -64,5 +69,7 @@
   },
   "engines": {
     "node": ">=14.17.1"
-  }
+  },
+
+  "precommit": "precommit:hook"
 }
