@@ -1,9 +1,9 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import classnames from 'classnames';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
@@ -11,15 +11,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type Props = {
-  className?: string
-}
-
-const ContainedButtons: React.FC<Props> = ({className}) => {
+export default function ContainedButtons(): JSX.Element {
   const classes = useStyles();
 
   return (
-    <div className={classnames(classes.root, className)}>
+    <div className={classes.root}>
       <Button variant="contained">Default</Button>
       <Button variant="contained" color="primary">
         Primary
@@ -36,5 +32,3 @@ const ContainedButtons: React.FC<Props> = ({className}) => {
     </div>
   );
 }
-
-export default ContainedButtons
