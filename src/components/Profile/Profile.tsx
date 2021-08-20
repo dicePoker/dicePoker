@@ -1,10 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  FormControl, Link, TextField, Grid, Avatar,
-} from '@material-ui/core';
+import { FormControl, Link, TextField, Grid, Avatar } from '@material-ui/core';
 import React from 'react';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   link: {
     marginTop: theme.spacing(6),
     textAlign: 'center',
@@ -17,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Profile(): JSX.Element {
+export const Profile = (): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -57,7 +55,7 @@ export default function Profile(): JSX.Element {
             }}
           />
           <TextField
-            name="first_name"
+            name="firstName"
             label="Имя"
             defaultValue="User name"
             InputProps={{
@@ -65,7 +63,7 @@ export default function Profile(): JSX.Element {
             }}
           />
           <TextField
-            name="second_name"
+            name="secondName"
             label="Фамилия"
             defaultValue="User surname"
             InputProps={{
@@ -82,10 +80,10 @@ export default function Profile(): JSX.Element {
             }}
           />
         </FormControl>
-        <Link className={classes.link} onClick={(e) => e.preventDefault()}>
+        <Link className={classes.link} onClick={e => e.preventDefault()}>
           Редактировать
         </Link>
       </Grid>
     </section>
   );
-}
+};
