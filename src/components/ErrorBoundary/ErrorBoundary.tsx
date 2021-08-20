@@ -1,19 +1,30 @@
-import React, {ErrorInfo} from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+type Props = {
+  children?: JSX.Element;
+};
 
 export default class ErrorBoundary extends React.Component {
+  static propTypes = {
+    children: PropTypes.node.isRequired,
+  };
+  constructor(props: Props) {
+    super(props);
+  }
 
   state = {
-    hasError: false
+    hasError: false,
+  };
+
+  componentDidCatch(): void {
+    this.setState({ hasError: true });
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    this.setState({hasError: true})
-  }
-
-  render() {
+  render(): JSX.Element {
     if (this.state.hasError) {
-      return <h1>Что-то пошло не так, пожалуйста, перезагрузите страницу</h1>
+      return <h1>Что-то пошло не так, пожалуйста, перезагрузите страницу</h1>;
     }
-    return this.props.children
+    return this.props.children as JSX.Element;
   }
 }

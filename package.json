@@ -1,5 +1,5 @@
 {
-  "name": "DicePoker",
+  "name": "dice-poker",
   "version": "1.0.0",
   "description": "",
   "browserslist": [
@@ -73,6 +73,5 @@
   "engines": {
     "node": ">=14.17.1"
   },
-
   "precommit": "precommit:hook"
 }
