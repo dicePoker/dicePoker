@@ -6,6 +6,7 @@ import './App.scss';
 import { SignInForm } from '../SignInForm/SignInForm';
 import { SignUpForm } from '../SignUpForm/SignUpForm';
 import { Dashboard } from '../Dashboard/Dashboard';
+import { Forum } from '../Forum/Forum';
 
 export const App = (): JSX.Element => (
   <ErrorBoundary>
@@ -20,6 +21,7 @@ export const App = (): JSX.Element => (
         <Route path="/signin/" component={SignInForm} />
         <Route path="/signup/" component={SignUpForm} />
         <Route path="/dashboard/" component={Dashboard} />
+        <Route path="/forum/" component={Forum} />
         <Redirect to={'/'} />
       </Switch>
     </div>
