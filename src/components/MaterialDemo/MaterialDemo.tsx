@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 
 export default function ContainedButtons(): JSX.Element {
-
   return (
     <div>
       <Link to="/signin/">

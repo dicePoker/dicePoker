@@ -3,8 +3,8 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import MaterialDemo from '../MaterialDemo/MaterialDemo';
 import './App.scss';
-import { SignIn } from "../../pages/SignIn/SignIn";
-import { SignUp } from "../../pages/SignUp/SignUp";
+import { SignIn } from '../../pages/SignIn/SignIn';
+import { SignUp } from '../../pages/SignUp/SignUp';
 import { Dashboard } from '../../pages/Dashboard/Dashboard';
 import { Forum } from '../../pages/Forum/Forum';
 
