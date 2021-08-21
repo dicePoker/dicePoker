@@ -1,4 +1,4 @@
-.Forum {
+.forum {
   width: 100%;
   max-width: 915px;
 
@@ -40,6 +40,10 @@
       display: flex;
       justify-content: flex-end;
     }
+  }
+
+  &__list {
+    list-style-type: none;
   }
 
   &__block-topic {

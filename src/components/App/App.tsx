@@ -3,23 +3,18 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import MaterialDemo from '../MaterialDemo/MaterialDemo';
 import './App.scss';
-import { SignInForm } from '../SignInForm/SignInForm';
-import { SignUpForm } from '../SignUpForm/SignUpForm';
-import { Dashboard } from '../Dashboard/Dashboard';
-import { Forum } from '../Forum/Forum';
+import { SignIn } from "../../pages/SignIn/SignIn";
+import { SignUp } from "../../pages/SignUp/SignUp";
+import { Dashboard } from '../../pages/Dashboard/Dashboard';
+import { Forum } from '../../pages/Forum/Forum';
 
 export const App = (): JSX.Element => (
   <ErrorBoundary>
     <div className="App">
       <MaterialDemo />
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => <div style={{ maxWidth: 800 }}>СТАРТОВАЯ СТРАНИЦА</div>}
-        />
-        <Route path="/signin/" component={SignInForm} />
-        <Route path="/signup/" component={SignUpForm} />
+        <Route path="/signin/" component={SignIn} />
+        <Route path="/signup/" component={SignUp} />
         <Route path="/dashboard/" component={Dashboard} />
         <Route path="/forum/" component={Forum} />
         <Redirect to={'/'} />
