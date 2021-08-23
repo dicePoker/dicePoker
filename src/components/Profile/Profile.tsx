@@ -1,22 +1,15 @@
-import { makeStyles } from '@material-ui/core/styles';
 import { FormControl, Link, TextField, Grid, Avatar } from '@material-ui/core';
 import React from 'react';
+import { useStyles } from '../../utils/makeStyles';
+import profileTextFieldsData from '../../utils/profileTextFields.json';
 
-const useStyles = makeStyles(theme => ({
-  link: {
-    marginTop: theme.spacing(6),
-    textAlign: 'center',
-    color: '#1769AA',
-  },
-  large: {
-    width: theme.spacing(7),
-    height: theme.spacing(7),
-    marginBottom: theme.spacing(4),
-  },
-}));
+const getTextFieldsData = () => {
+  return profileTextFieldsData;
+};
 
 export const Profile = (): JSX.Element => {
   const classes = useStyles();
+  const textFieldsData = getTextFieldsData();
 
   return (
     <section className="profile">
@@ -29,56 +22,18 @@ export const Profile = (): JSX.Element => {
         <h1 className="profile__title">Профиль</h1>
         <Avatar className={classes.large}>H</Avatar>
         <FormControl component="form">
-          <TextField
-            name="login"
-            label="Логин"
-            defaultValue="User login"
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-          <TextField
-            name="password"
-            label="Пароль"
-            defaultValue="User password"
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-          <TextField
-            name="email"
-            label="E-mail"
-            type="email"
-            defaultValue="User email"
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-          <TextField
-            name="firstName"
-            label="Имя"
-            defaultValue="User name"
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-          <TextField
-            name="secondName"
-            label="Фамилия"
-            defaultValue="User surname"
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-          <TextField
-            name="phone"
-            label="Телефон"
-            type="tel"
-            defaultValue="User phone"
-            InputProps={{
-              readOnly: true,
-            }}
-          />
+          {textFieldsData.map((item, index) => (
+            <TextField
+              key={`profile-text-field-${item.name}-${index}`}
+              name={item.name}
+              label={item.label}
+              type={item.type ? item.type : 'text'}
+              defaultValue={item.defaultValue}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          ))}
         </FormControl>
         <Link className={classes.link} onClick={e => e.preventDefault()}>
           Редактировать
