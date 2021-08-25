@@ -1,0 +1,15 @@
+.main {
+  &__btn-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__canvas {
+    width: 100%;
+    height: 600px;
+  }
+}
