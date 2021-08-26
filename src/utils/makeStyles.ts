@@ -29,4 +29,10 @@ export const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(6),
     width: '144px',
   },
+
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    marginBottom: theme.spacing(4),
+  },
 }));
