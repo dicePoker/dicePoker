@@ -2,6 +2,8 @@ import React from 'react';
 import './Dashboard.scss';
 import sortList from './sortList.json';
 
+const userStatistics = [1, 2, 3, 4, 5, 6]; // ЭТО ЗАГЛУШКА, ОНА УДАЛИТСЯ и данные будут подтягиваться из STORE REDUX
+
 export const Dashboard = (): JSX.Element => {
   return (
     <div className="dashboard">
@@ -17,7 +19,7 @@ export const Dashboard = (): JSX.Element => {
         </ul>
       </div>
       <div className="dashboard__main-container">
-        {[1, 2, 3, 4, 5, 6].map((_, index) => (
+        {userStatistics.map((_, index) => (
           <div key={index} className="dashboard__user-board">
             <div className="dashboard__board-number">1</div>
             <div className="dashboard__board-avatar" />

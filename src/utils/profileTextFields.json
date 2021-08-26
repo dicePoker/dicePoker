@@ -1,34 +1,34 @@
 [
   {
     "name": "login",
-    "label":"Логин",
-    "defaultValue":"User login"
+    "label": "Логин",
+    "defaultValue": "User login"
   },
   {
     "name": "password",
-    "label":"Пароль",
-    "defaultValue":"User password"
+    "label": "Пароль",
+    "defaultValue": "User password"
   },
   {
     "name": "email",
-    "label":"E-mail",
+    "label": "E-mail",
     "type": "email",
-    "defaultValue":"User email"
+    "defaultValue": "User email"
   },
   {
     "name": "firstName",
-    "label":"Имя",
-    "defaultValue":"User name"
+    "label": "Имя",
+    "defaultValue": "User name"
   },
   {
     "name": "secondName",
-    "label":"Пароль",
-    "defaultValue":"User second name"
+    "label": "Пароль",
+    "defaultValue": "User second name"
   },
   {
     "name": "phone",
-    "label":"Телефон",
+    "label": "Телефон",
     "type": "tel",
-    "defaultValue":"User phone"
+    "defaultValue": "User phone"
   }
 ]
