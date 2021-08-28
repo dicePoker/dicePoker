@@ -21,7 +21,7 @@ export class DrawController {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  drawCube(topLeftX: number, topLeftY: number, val: number) {
+  drawCube(topLeftX: number, topLeftY: number, val: number): void {
     this.ctx.beginPath();
     this.ctx.moveTo(topLeftX + CUBE_BORDER_RADIUS, topLeftY);
     this.ctx.lineTo(topLeftX + CUBE_SIZE - CUBE_BORDER_RADIUS, topLeftY);
@@ -102,9 +102,11 @@ export class DrawController {
         this.drawBottomLeft(topLeftX, topLeftY);
         this.drawMiddleRight(topLeftX, topLeftY);
         this.drawMiddleLeft(topLeftX, topLeftY);
+        break;
     }
   }
-  drawCircle(centerX: number, centerY: number) {
+
+  drawCircle(centerX: number, centerY: number): void {
     this.ctx.beginPath();
     this.ctx.arc(centerX, centerY, CIRCLE_RADIUS, 0, 2 * Math.PI, false);
     this.ctx.fillStyle = 'rgba(0, 0, 0)';
@@ -112,40 +114,46 @@ export class DrawController {
   }
 
   // методы рисования точек
-  drawTopLeft(topLeftX: number, topLeftY: number) {
+  drawTopLeft(topLeftX: number, topLeftY: number): void {
     this.drawCircle(
       topLeftX + CIRCLE_GAP + CIRCLE_RADIUS,
       topLeftY + CIRCLE_GAP + CIRCLE_RADIUS,
     );
   }
-  drawTopRight(topLeftX: number, topLeftY: number) {
+
+  drawTopRight(topLeftX: number, topLeftY: number): void {
     this.drawCircle(
       topLeftX + CUBE_SIZE - CIRCLE_GAP - CIRCLE_RADIUS,
       topLeftY + CIRCLE_GAP + CIRCLE_RADIUS,
     );
   }
-  drawMiddleLeft(topLeftX: number, topLeftY: number) {
+
+  drawMiddleLeft(topLeftX: number, topLeftY: number): void {
     this.drawCircle(
       topLeftX + CIRCLE_GAP + CIRCLE_RADIUS,
       topLeftY + CUBE_SIZE / 2,
     );
   }
-  drawMiddle(topLeftX: number, topLeftY: number) {
+
+  drawMiddle(topLeftX: number, topLeftY: number): void {
     this.drawCircle(topLeftX + CUBE_SIZE / 2, topLeftY + CUBE_SIZE / 2);
   }
-  drawMiddleRight(topLeftX: number, topLeftY: number) {
+
+  drawMiddleRight(topLeftX: number, topLeftY: number): void {
     this.drawCircle(
       topLeftX + CUBE_SIZE - CIRCLE_GAP - CIRCLE_RADIUS,
       topLeftY + CUBE_SIZE / 2,
     );
   }
-  drawBottomLeft(topLeftX: number, topLeftY: number) {
+
+  drawBottomLeft(topLeftX: number, topLeftY: number): void {
     this.drawCircle(
       topLeftX + CIRCLE_GAP + CIRCLE_RADIUS,
       topLeftY + CUBE_SIZE - CIRCLE_GAP - CIRCLE_RADIUS,
     );
   }
-  drawBottomRight(topLeftX: number, topLeftY: number) {
+
+  drawBottomRight(topLeftX: number, topLeftY: number): void {
     this.drawCircle(
       topLeftX + CUBE_SIZE - CIRCLE_GAP - CIRCLE_RADIUS,
       topLeftY + CUBE_SIZE - CIRCLE_GAP - CIRCLE_RADIUS,
