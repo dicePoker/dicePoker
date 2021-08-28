@@ -2,14 +2,18 @@ const CUBE_SIZE = 40;
 const CUBE_BORDER_RADIUS = 4;
 const CIRCLE_RADIUS = 4;
 const CIRCLE_GAP = 4; // отступ краев круга от краев кубика
+const CUBE_GAP = 20;
+const MARGIN = 10;
 
 export class DrawController {
-  private canvas: HTMLCanvasElement;
+  public canvas: HTMLCanvasElement;
   private ctx: CanvasRenderingContext2D;
   private readonly pixelRatio: number;
+  // TODO: пофиксить разрешение https://medium.com/wdstack/fixing-html5-2d-canvas-blur-8ebe27db07da
 
   constructor(canvas: HTMLCanvasElement) {
-    this.pixelRatio = window.devicePixelRatio || 1;
+    //this.pixelRatio = window.devicePixelRatio || 1;
+    this.pixelRatio = 1;
     this.canvas = canvas;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -19,6 +23,7 @@ export class DrawController {
     this.canvas.height = this.canvas.height * this.pixelRatio;
     this.ctx.fillStyle = '#40D360';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.setCanvasClickListener = this.setCanvasClickListener.bind(this);
   }
 
   drawCube(topLeftX: number, topLeftY: number, val: number): void {
@@ -60,15 +65,6 @@ export class DrawController {
     this.ctx.fill();
 
     // рисуем точки
-    if (val % 2 !== 0) {
-      // нечетное число - всегда есть центральная точка
-      this.drawMiddle(topLeftX, topLeftY);
-    } else {
-      // четное число - всегда есть точка в левом верхнем и точка в правом нижнем
-      this.drawTopLeft(topLeftX, topLeftY);
-      this.drawBottomRight(topLeftX, topLeftY);
-    }
-
     switch (val) {
       case 1:
         this.drawMiddle(topLeftX, topLeftY);
@@ -158,5 +154,39 @@ export class DrawController {
       topLeftX + CUBE_SIZE - CIRCLE_GAP - CIRCLE_RADIUS,
       topLeftY + CUBE_SIZE - CIRCLE_GAP - CIRCLE_RADIUS,
     );
+  }
+
+  // рисуем верхний ряд
+  drawTopRow(values: number[]) {
+    values.forEach((item, index) => {
+      this.drawCube(
+        MARGIN + index * CUBE_GAP + index * CUBE_SIZE,
+        MARGIN,
+        item,
+      );
+    });
+  }
+
+  // рисуем верхний ряд
+  drawBottomRow(values: number[]) {
+    values.forEach((item, index) => {
+      this.drawCube(
+        MARGIN + index * CUBE_GAP + index * CUBE_SIZE,
+        MARGIN + 2 * CUBE_SIZE,
+        item,
+      );
+    });
+  }
+
+  setCanvasClickListener(callback: any) {
+    this.canvas.addEventListener('click', callback);
+  }
+
+  getClickedTopRowCubeIndex(x: number, y: number, topRowQuantity: number) {
+    if (y < MARGIN || y > MARGIN + CUBE_SIZE) {
+      // кликнули не по кубику по высоте
+      return -1;
+    }
+    return 0;
   }
 }

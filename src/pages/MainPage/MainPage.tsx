@@ -1,9 +1,11 @@
 import React, { PureComponent, ReactElement } from 'react';
 import { Main } from '../../components/Main/Main';
-import { DrawController } from '../../utils/DrawController';
+import { DrawController } from '../../controllers/DrawController';
+import { GameController } from '../../controllers/GameController';
 
 export class MainPage extends PureComponent {
   private drawController: DrawController | undefined;
+  private gameController: GameController | undefined;
 
   render(): ReactElement {
     return (
@@ -16,7 +18,9 @@ export class MainPage extends PureComponent {
   componentDidMount(): void {
     const canvas = document.getElementById('canvas') as HTMLCanvasElement;
     this.drawController = new DrawController(canvas);
-    this.drawController.drawCube(10, 10, 5);
-    this.drawController.drawCube(70, 10, 6);
+    this.gameController = new GameController(this.drawController);
+    //this.drawController.drawTopRow([1, 3, 4]);
+    //this.drawController.drawBottomRow([2, 5, 6]);
+    this.gameController.init();
   }
 }
