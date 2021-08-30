@@ -1,0 +1,56 @@
+.forum {
+  width: 100%;
+  max-width: 915px;
+
+  &__title {
+    margin-left: 130px;
+    margin-bottom: 80px;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 35px;
+  }
+
+  &__block-title {
+    width: 100%;
+    background: #e5e5e5;
+    display: flex;
+    padding: 23px 41px;
+    margin-bottom: 24px;
+  }
+
+  &__title-column {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 400;
+
+    &:first-child {
+      max-width: 450px;
+      width: 100%;
+    }
+
+    &:not(:first-child) {
+      max-width: 225px;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  &__list {
+    list-style-type: none;
+  }
+
+  &__block-topic {
+    width: 100%;
+    background: #e5e5e5;
+    display: flex;
+    padding: 10px 41px;
+    margin-bottom: 24px;
+  }
+}
