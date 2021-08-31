@@ -35,12 +35,19 @@ export class GameController {
     const x = event.offsetX;
     const y = event.offsetY; // координаты клика по канвасу
     console.log('x: ' + x + ' y: ' + y);
-    console.log(
-      this.drawController.getClickedTopRowCubeIndex(
-        x,
-        y,
-        this.currentVals.length,
-      ),
+    const clicked = this.drawController.getClickedTopRowCubeIndex(
+      x,
+      y,
+      this.currentVals.length,
     );
+    if (clicked > 0) {
+      this.drawController.clearCanvas();
+      this.currentVals = this.currentVals.filter(item => item !== clicked);
+      this.selectedValues.push(clicked);
+      this.drawController.drawTopRow(this.currentVals);
+      this.drawController.drawBottomRow(this.selectedValues);
+      this.drawController.removeCanvasClickListener(this.canvasClickHandler);
+      this.drawController.setCanvasClickListener(this.canvasClickHandler);
+    }
   }
 }

@@ -7,7 +7,7 @@ const MARGIN = 10;
 
 export class DrawController {
   public canvas: HTMLCanvasElement;
-  private ctx: CanvasRenderingContext2D;
+  ctx: CanvasRenderingContext2D;
   private readonly pixelRatio: number;
   // TODO: пофиксить разрешение https://medium.com/wdstack/fixing-html5-2d-canvas-blur-8ebe27db07da
 
@@ -18,12 +18,12 @@ export class DrawController {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this.ctx = this.canvas.getContext('2d');
-    this.ctx.fillStyle = '#40D360';
-    this.canvas.width = this.canvas.width * this.pixelRatio;
-    this.canvas.height = this.canvas.height * this.pixelRatio;
+    // this.canvas.width = this.canvas.width * this.pixelRatio;
+    // this.canvas.height = this.canvas.height * this.pixelRatio;
     this.ctx.fillStyle = '#40D360';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.setCanvasClickListener = this.setCanvasClickListener.bind(this);
+    this.removeCanvasClickListener = this.removeCanvasClickListener.bind(this);
   }
 
   drawCube(topLeftX: number, topLeftY: number, val: number): void {
@@ -182,11 +182,49 @@ export class DrawController {
     this.canvas.addEventListener('click', callback);
   }
 
+  removeCanvasClickListener(callback: any) {
+    this.canvas.removeEventListener('click', callback);
+  }
+
   getClickedTopRowCubeIndex(x: number, y: number, topRowQuantity: number) {
-    if (y < MARGIN || y > MARGIN + CUBE_SIZE) {
+    // хз почему нужно умножать на 4 координаты при клике
+    if (y < MARGIN * 4 || y > (MARGIN + CUBE_SIZE) * 4) {
       // кликнули не по кубику по высоте
       return -1;
     }
-    return 0;
+    // кликнули не по кубику по ширине
+    if (
+      x < MARGIN * 4 ||
+      x >
+        (MARGIN +
+          (topRowQuantity - 1) * CUBE_GAP +
+          topRowQuantity * CUBE_SIZE) *
+          4
+    ) {
+      return -1;
+    }
+    //кликнули не по кубику в промежутках
+    // margin*4
+
+    const cubesCoordinates = [];
+    for (let i = 0; i < topRowQuantity; i++) {
+      const curr = [];
+      curr.push((MARGIN + i * CUBE_SIZE + i * CUBE_GAP) * 4);
+      curr.push((MARGIN + (i + 1) * CUBE_SIZE + i * CUBE_GAP) * 4);
+      cubesCoordinates.push(curr);
+    }
+    for (let i = 0; i < cubesCoordinates.length; i++) {
+      const item = cubesCoordinates[i];
+      if (x >= item[0] && x <= item[1]) {
+        return i + 1;
+      }
+    }
+    return -1;
+  }
+
+  clearCanvas() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillStyle = '#40D360';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 }
