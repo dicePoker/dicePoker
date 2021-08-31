@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Dashboard.scss';
 import sortList from './sortList.json';
-
-const userStatistics = [1, 2, 3, 4, 5, 6]; // ЭТО ЗАГЛУШКА, ОНА УДАЛИТСЯ и данные будут подтягиваться из STORE REDUX
+import { fetchUsers } from '../../redux/actions/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { StateTypes } from '../../redux/types';
 
 export const Dashboard = (): JSX.Element => {
+  const usersData = useSelector((state: StateTypes) => state.users);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
   return (
     <div className="dashboard">
       <h1 className="dashboard__title">Таблица лидеров</h1>
@@ -19,15 +27,16 @@ export const Dashboard = (): JSX.Element => {
         </ul>
       </div>
       <div className="dashboard__main-container">
-        {userStatistics.map((_, index) => (
-          <div key={index} className="dashboard__user-board">
-            <div className="dashboard__board-number">1</div>
-            <div className="dashboard__board-avatar" />
-            <p className="dashboard__user-info">User</p>
-            <p className="dashboard__user-info">325</p>
-            <p className="dashboard__user-info">325</p>
-          </div>
-        ))}
+        {usersData &&
+          usersData.map(({ name, id, record, rating }) => (
+            <div key={id} className="dashboard__user-board">
+              <div className="dashboard__board-number">{id}</div>
+              <div className="dashboard__board-avatar" />
+              <p className="dashboard__user-info">{name}</p>
+              <p className="dashboard__user-info">{rating}</p>
+              <p className="dashboard__user-info">{record}</p>
+            </div>
+          ))}
       </div>
     </div>
   );
