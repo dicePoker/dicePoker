@@ -44,7 +44,6 @@ class ApiService {
     promiseGetUsers = promise;
     return promise;
   };
-
 }
 
 const apiService = new ApiService();
