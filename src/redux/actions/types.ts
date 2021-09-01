@@ -1,10 +1,10 @@
 import { ActionTypes, StateTypes } from '../types';
 
-export interface ActionLoadingTrue {
+export interface ActionloadingSuccess {
   type: ActionTypes.LOADING;
 }
 
-export interface ActionLoadingFalse {
+export interface ActionloadingFailed {
   type: ActionTypes.LOADING_OFF;
 }
 

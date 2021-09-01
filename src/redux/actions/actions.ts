@@ -1,7 +1,7 @@
 import { ActionType, ActionTypes, StateTypes } from '../types';
 import {
-  ActionLoadingFalse,
-  ActionLoadingTrue,
+  ActionloadingFailed,
+  ActionloadingSuccess,
   ActionResetLoading,
   ActionSetUsers,
 } from './types';
@@ -18,13 +18,13 @@ export type ThunkType = ThunkAction<
 >;
 
 // ставим загрузку
-export const loadingTrue = (): ActionLoadingTrue => {
+export const loadingSuccess = (): ActionloadingSuccess => {
   return {
     type: ActionTypes.LOADING,
   };
 };
 
-export const loadingFalse = (): ActionLoadingFalse => {
+export const loadingFailed = (): ActionloadingFailed => {
   return {
     type: ActionTypes.LOADING_OFF,
   };
@@ -44,7 +44,7 @@ const setUsers = (users: StateTypes['users']): ActionSetUsers => {
 };
 
 export const fetchUsers = (): ThunkType => (dispatch, getState, apiService) => {
-  dispatch(loadingTrue());
+  dispatch(loadingSuccess());
   apiService
     .getUsers()
     .then((response: StateTypes['users']) => {
@@ -53,5 +53,5 @@ export const fetchUsers = (): ThunkType => (dispatch, getState, apiService) => {
     .catch(error => {
       console.log(error);
     })
-    .finally(() => dispatch(loadingFalse()));
+    .finally(() => dispatch(loadingFailed()));
 };

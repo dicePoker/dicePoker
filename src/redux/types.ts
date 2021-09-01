@@ -1,6 +1,6 @@
 import {
-  ActionLoadingFalse,
-  ActionLoadingTrue,
+  ActionloadingFailed,
+  ActionloadingSuccess,
   ActionResetLoading,
   ActionSetUsers,
 } from './actions/types';
@@ -24,6 +24,6 @@ export enum ActionTypes {
 
 export type ActionType =
   | ActionResetLoading
-  | ActionLoadingTrue
-  | ActionLoadingFalse
+  | ActionloadingSuccess
+  | ActionloadingFailed
   | ActionSetUsers;
