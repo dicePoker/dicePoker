@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Main.scss';
 import { useStyles } from '../../utils/makeStyles';
 import { Button, Grid } from '@material-ui/core';
+import { Modal } from '../Modal/Modal';
+import { Table } from '../Table/Table';
 
 export const Main = (): JSX.Element => {
   const classes = useStyles();
+  const [isShowModal, setShowModal] = useState(false);
+
+  const showModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   return (
     <section className="main">
@@ -41,12 +47,16 @@ export const Main = (): JSX.Element => {
               variant="contained"
               size="medium"
               className={classes.button}
+              onClick={showModal}
             >
               Таблица
             </Button>
           </li>
         </ul>
       </Grid>
+      <Modal isShow={isShowModal} closeHandle={closeModal}>
+        <Table />
+      </Modal>
     </section>
   );
 };
