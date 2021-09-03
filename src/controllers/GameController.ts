@@ -4,15 +4,19 @@ import { getRandomCube } from '../utils/getRandomCube';
 const TOTAL_CUBES = 5;
 
 export class GameController {
-  private drawController: DrawController;
+  private drawController: DrawController | undefined;
   private selectedValues: number[];
   private currentVals: number[];
 
-  constructor(drawController: DrawController) {
-    this.drawController = drawController;
+  constructor() {
     this.selectedValues = [];
     this.currentVals = [];
     this.canvasClickHandler = this.canvasClickHandler.bind(this);
+    this.makeThrow = this.makeThrow.bind(this);
+  }
+
+  setDrawController(drawController: DrawController) {
+    this.drawController = drawController;
   }
 
   init() {
@@ -24,10 +28,12 @@ export class GameController {
   }
 
   makeThrow() {
+    console.log(this);
     const vals = [];
     for (let i = 0; i < TOTAL_CUBES - this.selectedValues.length; i++) {
       vals.push(getRandomCube());
     }
+    this.currentVals = vals;
     this.drawController.drawTopRow(vals);
   }
 
@@ -40,10 +46,13 @@ export class GameController {
       y,
       this.currentVals.length,
     );
-    if (clicked > 0) {
+    if (clicked >= 0) {
+      const clickedValue = this.currentVals[clicked];
       this.drawController.clearCanvas();
-      this.currentVals = this.currentVals.filter(item => item !== clicked);
-      this.selectedValues.push(clicked);
+      this.currentVals = this.currentVals.filter(
+        (item, index) => index !== clicked,
+      );
+      this.selectedValues.push(clickedValue);
       this.drawController.drawTopRow(this.currentVals);
       this.drawController.drawBottomRow(this.selectedValues);
       this.drawController.removeCanvasClickListener(this.canvasClickHandler);

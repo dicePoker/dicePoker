@@ -2,8 +2,13 @@ import React from 'react';
 import './Main.scss';
 import { useStyles } from '../../utils/makeStyles';
 import { Button, Grid } from '@material-ui/core';
+import { GameController } from '../../controllers/GameController';
 
-export const Main = (): JSX.Element => {
+export type MainProps = {
+  gameController: GameController;
+};
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const Main = (props: MainProps): JSX.Element => {
   const classes = useStyles();
 
   return (
@@ -22,6 +27,7 @@ export const Main = (): JSX.Element => {
               size="medium"
               color="primary"
               className={classes.button}
+              onClick={props.gameController.makeThrow}
             >
               Перебросить
             </Button>
