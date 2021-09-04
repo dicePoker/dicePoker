@@ -4,8 +4,13 @@ import { useStyles } from '../../utils/makeStyles';
 import { Button, Grid } from '@material-ui/core';
 import { Modal } from '../Modal/Modal';
 import { Table } from '../Table/Table';
+import { GameController } from '../../controllers/GameController';
 
-export const Main = (): JSX.Element => {
+export type MainProps = {
+  gameController: GameController;
+};
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const Main = (props: MainProps): JSX.Element => {
   const classes = useStyles();
   const [isShowModal, setShowModal] = useState(false);
 
@@ -28,6 +33,7 @@ export const Main = (): JSX.Element => {
               size="medium"
               color="primary"
               className={classes.button}
+              onClick={props.gameController.makeThrow}
             >
               Перебросить
             </Button>

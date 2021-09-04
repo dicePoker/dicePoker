@@ -216,7 +216,7 @@ export class DrawController {
     for (let i = 0; i < cubesCoordinates.length; i++) {
       const item = cubesCoordinates[i];
       if (x >= item[0] && x <= item[1]) {
-        return i + 1;
+        return i;
       }
     }
     return -1;
