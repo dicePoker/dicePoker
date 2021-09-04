@@ -9,6 +9,7 @@ type propsType = {
 
 export const Modal = (props: propsType): JSX.Element | null => {
   if (!props.isShow) return null;
+
   return (
     <div className="modal">
       <div className="modal__wrapper">
