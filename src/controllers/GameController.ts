@@ -7,6 +7,8 @@ export class GameController {
   private drawController: DrawController | undefined;
   private selectedValues: number[];
   private currentVals: number[];
+  public finishedVals: number[];
+  numberOfThrows = 2;
 
   constructor() {
     this.selectedValues = [];
@@ -20,21 +22,35 @@ export class GameController {
   }
 
   init() {
+    this.drawController.clearCanvas();
     for (let i = 0; i < TOTAL_CUBES; i++) {
       this.currentVals.push(getRandomCube());
     }
     this.drawController.drawTopRow(this.currentVals);
     this.drawController.setCanvasClickListener(this.canvasClickHandler);
+    this.numberOfThrows = 2;
+    this.finishedVals = [];
+  }
+
+  finishMove() {
+    this.selectedValues.forEach(item => this.finishedVals.push(item));
+    this.currentVals.forEach(item => this.finishedVals.push(item));
+    this.selectedValues = [];
+    this.currentVals = [];
+    this.numberOfThrows = 2;
   }
 
   makeThrow() {
-    console.log(this);
-    const vals = [];
-    for (let i = 0; i < TOTAL_CUBES - this.selectedValues.length; i++) {
-      vals.push(getRandomCube());
+    if (this.numberOfThrows > 0) {
+      const vals = [];
+      for (let i = 0; i < TOTAL_CUBES - this.selectedValues.length; i++) {
+        vals.push(getRandomCube());
+      }
+      this.currentVals = vals;
+      this.drawController.drawTopRow(vals);
+      this.numberOfThrows--;
+      console.log(this.numberOfThrows);
     }
-    this.currentVals = vals;
-    this.drawController.drawTopRow(vals);
   }
 
   canvasClickHandler(event: Event) {

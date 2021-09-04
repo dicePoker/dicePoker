@@ -9,13 +9,17 @@ import { GameController } from '../../controllers/GameController';
 export type MainProps = {
   gameController: GameController;
 };
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+
 export const Main = (props: MainProps): JSX.Element => {
   const classes = useStyles();
   const [isShowModal, setShowModal] = useState(false);
 
   const showModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
+  const finishMove = (): void => {
+    props.gameController.finishMove();
+    showModal();
+  };
 
   return (
     <section className="main">
@@ -32,6 +36,7 @@ export const Main = (props: MainProps): JSX.Element => {
               variant="contained"
               size="medium"
               color="primary"
+              disabled={props.gameController.numberOfThrows === 0}
               className={classes.button}
               onClick={props.gameController.makeThrow}
             >
@@ -44,6 +49,7 @@ export const Main = (props: MainProps): JSX.Element => {
               size="medium"
               color="secondary"
               className={classes.button}
+              onClick={finishMove}
             >
               Завершить
             </Button>
