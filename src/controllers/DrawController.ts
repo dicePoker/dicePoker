@@ -157,7 +157,7 @@ export class DrawController {
   }
 
   // рисуем верхний ряд
-  drawTopRow(values: number[]) {
+  drawTopRow(values: number[]): void {
     values.forEach((item, index) => {
       this.drawCube(
         MARGIN + index * CUBE_GAP + index * CUBE_SIZE,
@@ -168,7 +168,7 @@ export class DrawController {
   }
 
   // рисуем верхний ряд
-  drawBottomRow(values: number[]) {
+  drawBottomRow(values: number[]): void {
     values.forEach((item, index) => {
       this.drawCube(
         MARGIN + index * CUBE_GAP + index * CUBE_SIZE,
@@ -178,15 +178,19 @@ export class DrawController {
     });
   }
 
-  setCanvasClickListener(callback: any) {
+  setCanvasClickListener(callback: any): void {
     this.canvas.addEventListener('click', callback);
   }
 
-  removeCanvasClickListener(callback: any) {
+  removeCanvasClickListener(callback: any): void {
     this.canvas.removeEventListener('click', callback);
   }
 
-  getClickedTopRowCubeIndex(x: number, y: number, topRowQuantity: number) {
+  getClickedTopRowCubeIndex(
+    x: number,
+    y: number,
+    topRowQuantity: number,
+  ): void {
     // хз почему нужно умножать на 4 координаты при клике
     if (y < MARGIN * 4 || y > (MARGIN + CUBE_SIZE) * 4) {
       // кликнули не по кубику по высоте
@@ -222,7 +226,7 @@ export class DrawController {
     return -1;
   }
 
-  clearCanvas() {
+  clearCanvas(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.fillStyle = '#40D360';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);

@@ -17,11 +17,11 @@ export class GameController {
     this.makeThrow = this.makeThrow.bind(this);
   }
 
-  setDrawController(drawController: DrawController) {
+  setDrawController(drawController: DrawController): void {
     this.drawController = drawController;
   }
 
-  init() {
+  init(): void {
     this.drawController.clearCanvas();
     for (let i = 0; i < TOTAL_CUBES; i++) {
       this.currentVals.push(getRandomCube());
@@ -32,7 +32,7 @@ export class GameController {
     this.finishedVals = [];
   }
 
-  finishMove() {
+  finishMove(): void {
     this.selectedValues.forEach(item => this.finishedVals.push(item));
     this.currentVals.forEach(item => this.finishedVals.push(item));
     this.selectedValues = [];
@@ -40,7 +40,7 @@ export class GameController {
     this.numberOfThrows = 2;
   }
 
-  makeThrow() {
+  makeThrow(): void {
     if (this.numberOfThrows > 0) {
       const vals = [];
       for (let i = 0; i < TOTAL_CUBES - this.selectedValues.length; i++) {
@@ -53,7 +53,7 @@ export class GameController {
     }
   }
 
-  canvasClickHandler(event: Event) {
+  canvasClickHandler(event: Event): void {
     const x = event.offsetX;
     const y = event.offsetY; // координаты клика по канвасу
     console.log('x: ' + x + ' y: ' + y);
