@@ -5,7 +5,7 @@ import { useStyles } from '../../utils/makeStyles';
 
 export const SignInForm = (): JSX.Element => {
   const classes = useStyles();
-
+  console.log(classes);
   return (
     <div className="sign-in-form">
       <h1 className="sign-in-form__title">Вход</h1>

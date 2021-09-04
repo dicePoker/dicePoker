@@ -16,17 +16,17 @@ export const Header = (): JSX.Element => {
       >
         <ul className="header__nav">
           <li className="header__nav-item">
-            <Link className={classes.link} onClick={e => e.preventDefault()}>
+            <Link href="/" className={classes.headerLink}>
               Игра
             </Link>
           </li>
           <li className="header__nav-item">
-            <Link className={classes.link} onClick={e => e.preventDefault()}>
+            <Link href="/dashboard" className={classes.headerLink}>
               Лидерборд
             </Link>
           </li>
           <li className="header__nav-item">
-            <Link className={classes.link} onClick={e => e.preventDefault()}>
+            <Link href="/forum" className={classes.headerLink}>
               Форумы
             </Link>
           </li>
@@ -49,12 +49,15 @@ export const Header = (): JSX.Element => {
                 fill="#1769AA"
               />
             </svg>
-            <Link className={classes.link} onClick={e => e.preventDefault()}>
+            <Link
+              className={classes.headerLink}
+              onClick={e => e.preventDefault()}
+            >
               Вася
             </Link>
           </li>
           <li className="header__user-item">
-            <Link className={classes.link} onClick={e => e.preventDefault()}>
+            <Link href="/signin" className={classes.headerLink}>
               Выйти
             </Link>
           </li>
