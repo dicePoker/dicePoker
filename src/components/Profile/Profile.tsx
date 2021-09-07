@@ -1,11 +1,4 @@
-import {
-  FormControl,
-  Link,
-  TextField,
-  Grid,
-  Avatar,
-  Button,
-} from '@material-ui/core';
+import { FormControl, TextField, Avatar, Button } from '@material-ui/core';
 import React from 'react';
 import './Profile.scss';
 import { useStyles } from '../../utils/makeStyles';
