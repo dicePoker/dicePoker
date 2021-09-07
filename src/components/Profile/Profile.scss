@@ -1,26 +1,26 @@
-.sign-up-form {
-  width: 388px;
-  margin: auto;
+.profile {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 75px 0;
+  width: 388px;
   background-color: #C5A078;
   border: 1px solid #000000;
   border-radius: 15px;
-
-  &__title {
-    margin-bottom: 50px;
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: center;
-  }
 
   &__wrapper {
     display: flex;
     flex-direction: column;
     width: 214px;
+  }
+
+  &__title {
+    margin-bottom: 50px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000;
   }
 }
