@@ -13,7 +13,13 @@
     "noEmit": true,
     "jsx": "react",
     "noImplicitAny": true,
-    "noImplicitThis": true
+    "noImplicitThis": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "typeRoots": ["@types/**/*.d.ts", "node_modules/@types"]
   },
-  "include": ["src"]
+  "include": ["src/**/*","@types/**/*.d.ts"],
+
 }
