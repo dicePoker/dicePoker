@@ -28,14 +28,14 @@ export const Dashboard = (): JSX.Element => {
       </div>
       <div className="dashboard__main-container">
         {usersData.map(({ name, id, record, rating }) => (
-            <div key={id} className="dashboard__user-board">
-              <div className="dashboard__board-number">{id}</div>
-              <div className="dashboard__board-avatar" />
-              <p className="dashboard__user-info">{name}</p>
-              <p className="dashboard__user-info">{rating}</p>
-              <p className="dashboard__user-info">{record}</p>
-            </div>
-          ))}
+          <div key={id} className="dashboard__user-board">
+            <div className="dashboard__board-number">{id}</div>
+            <div className="dashboard__board-avatar" />
+            <p className="dashboard__user-info">{name}</p>
+            <p className="dashboard__user-info">{rating}</p>
+            <p className="dashboard__user-info">{record}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
