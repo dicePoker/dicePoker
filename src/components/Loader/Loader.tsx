@@ -5,9 +5,9 @@ type Props = {
   className?: string;
 };
 
-const Loader: React.FC<Props> = ({ className }) => {
+const Loader: React.FC<Props> = ({ className = '' }) => {
   return (
-    <div className={'loader ' + className}>
+    <div className={`loader ${className}`}>
       <div className="container">
         <div className="item-1">
           <div />

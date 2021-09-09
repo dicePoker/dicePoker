@@ -27,8 +27,7 @@ export const Dashboard = (): JSX.Element => {
         </ul>
       </div>
       <div className="dashboard__main-container">
-        {usersData &&
-          usersData.map(({ name, id, record, rating }) => (
+        {usersData.map(({ name, id, record, rating }) => (
             <div key={id} className="dashboard__user-board">
               <div className="dashboard__board-number">{id}</div>
               <div className="dashboard__board-avatar" />
