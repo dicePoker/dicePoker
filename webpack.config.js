@@ -17,7 +17,11 @@ module.exports = {
     extensions: ['.tsx', '.ts', '.js'],
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
-
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
+  },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
@@ -69,11 +73,11 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'static/assets/img',
+          from: './src/static/assets/img',
           to: 'img',
         },
       ],
     }),
-    new GenerateSW(),
+    // new GenerateSW(),
   ],
 };

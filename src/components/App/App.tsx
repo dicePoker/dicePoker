@@ -1,15 +1,15 @@
 import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import './App.scss';
-import { SignIn } from '../../pages/SignIn/SignIn';
-import { SignUp } from '../../pages/SignUp/SignUp';
-import { Dashboard } from '../../pages/Dashboard/Dashboard';
-import { Forum } from '../../pages/Forum/Forum';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import { SignIn } from '@/pages/SignIn/SignIn';
+import { SignUp } from '@/pages/SignUp/SignUp';
+import { Dashboard } from '@/pages/Dashboard/Dashboard';
+import { Forum } from '@/pages/Forum/Forum';
 import { GameOver } from '../GameOver/GameOver';
-import { ProfilePage } from '../../pages/ProfilePage/ProfilePage';
+import { ProfilePage } from '@/pages/ProfilePage/ProfilePage';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Loader from '../Loader';
-import { StateTypes } from '../../redux/types';
+import { StateTypes } from '@/redux/types';
 import { useSelector } from 'react-redux';
 
 export const App = (): JSX.Element => {
@@ -19,12 +19,12 @@ export const App = (): JSX.Element => {
     <ErrorBoundary>
       <Loader className={loading > 0 ? 'loader_is-opened' : ''} />
       <div className="App">
-        <GameOver
-          title={'игрок 1'}
-          handlerClick={() => {
-            console.log('click');
-          }}
-        />
+        {/*<GameOver*/}
+        {/*  title={'игрок 1'}*/}
+        {/*  handlerClick={() => {*/}
+        {/*    console.log('click');*/}
+        {/*  }}*/}
+        {/*/>*/}
         <Switch>
           <Route path="/signin/" component={SignIn} />
           <Route path="/signup/" component={SignUp} />

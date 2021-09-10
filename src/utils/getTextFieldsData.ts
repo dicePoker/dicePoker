@@ -1,6 +1,6 @@
-import profileTextFieldsData from './constants/profileTextFields.json';
-import signInTextFieldsData from './constants/signInTextFields.json';
-import signUpTextFieldsData from './constants/regTextFields.json';
+import profileTextFieldsData from './constants/profileTextFields';
+import signInTextFieldsData from './constants/signInTextFields';
+import signUpTextFieldsData from './constants/regTextFields';
 
 export enum TextFieldsDataEnum {
   'profile' = 'profile',
@@ -15,19 +15,17 @@ export type TextFieldsDataType = {
   type?: string;
 };
 
-export const getTextFieldsData = (
-  typeData: string,
-): TextFieldsDataType[] | [] => {
+export const getTextFieldsData = (typeData: string): TextFieldsDataType[] => {
   if (typeData === TextFieldsDataEnum.profile) {
-    return profileTextFieldsData;
+    return profileTextFieldsData as TextFieldsDataType[];
   }
 
   if (typeData === TextFieldsDataEnum.signIn) {
-    return signInTextFieldsData;
+    return signInTextFieldsData as TextFieldsDataType[];
   }
 
   if (typeData === TextFieldsDataEnum.signUp) {
-    return signUpTextFieldsData;
+    return signUpTextFieldsData as TextFieldsDataType[];
   }
-  return [];
+  return [] as TextFieldsDataType[];
 };

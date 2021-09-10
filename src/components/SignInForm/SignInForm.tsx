@@ -24,7 +24,7 @@ const validationSchema = yup.object({
 export const SignInForm = (): JSX.Element => {
   const classes = useStyles();
   const textFieldsData = getTextFieldsData(TextFieldsDataEnum.signIn);
-  const initialValues = (textFieldsData as []).reduce(
+  const initialValues = textFieldsData.reduce(
     (acc: Record<string, string>, field: TextFieldsDataType) => {
       return { ...acc, [field.name]: '' };
     },

@@ -14,7 +14,11 @@ export const GameOver = (props: GameOverType): JSX.Element => {
       <h2 className="game-over__title">Победил !</h2>
       <h3 className="game-over__name">{props.title}</h3>
       <div className="game-over__wrapper">
-        <img src={ChestImage} className="game-over__img" />
+        <img
+          src={ChestImage}
+          className="game-over__img"
+          alt="Сундук с золотом"
+        />
       </div>
       <button className="game-over__button" onClick={props.handlerClick}>
         Новый вызов !
