@@ -7,18 +7,27 @@ import { SignUp } from '../../pages/SignUp/SignUp';
 import { Dashboard } from '../../pages/Dashboard/Dashboard';
 import { Forum } from '../../pages/Forum/Forum';
 import { ProfilePage } from '../../pages/ProfilePage/ProfilePage';
+import Loader from '../Loader';
+import { StateTypes } from '../../redux/types';
+import { useSelector } from 'react-redux';
 
-export const App = (): JSX.Element => (
-  <ErrorBoundary>
-    <div className="App">
-      <Switch>
-        <Route path="/signin/" component={SignIn} />
-        <Route path="/signup/" component={SignUp} />
-        <Route path="/dashboard/" component={Dashboard} />
-        <Route path="/forum/" component={Forum} />
-        <Route path="/profile/" component={ProfilePage} />
-        <Redirect to={'/signin'} />
-      </Switch>
-    </div>
-  </ErrorBoundary>
-);
+export const App = (): JSX.Element => {
+  const loading = useSelector((state: StateTypes) => state.loading);
+
+  return (
+    <ErrorBoundary>
+      <Loader className={loading > 0 ? 'loader_is-opened' : ''} />
+      <div className="App">
+        <MaterialDemo />
+        <Switch>
+          <Route path="/signin/" component={SignIn} />
+          <Route path="/signup/" component={SignUp} />
+          <Route path="/dashboard/" component={Dashboard} />
+          <Route path="/forum/" component={Forum} />
+          <Route path="/profile/" component={ProfilePage} />
+          <Redirect to={'/signin'} />
+        </Switch>
+      </div>
+    </ErrorBoundary>
+  );
+};
