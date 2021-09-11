@@ -17,6 +17,8 @@ export const Main = (props: MainProps): JSX.Element => {
   const showModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
+  props.gameController.setCloseModal(closeModal);
+
   return (
     <section className="main">
       <p>Сейчас ходит {props.gameController.getCurrentPlayerName()}</p>

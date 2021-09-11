@@ -61,22 +61,22 @@ export const Table = (props: TableProps): JSX.Element => {
                           key={`table-item-${val.id}-${index}`}
                           className="table__item"
                         >
-                          {val.value !== -1 ? val.value : 0}
+                          {val.value !== -200 ? val.value : 0}
                         </li>
                       );
                     })
-                  : item.firstPhasePoints.map((val, index) => {
+                  : item.secondPhasePoints.map((val, index) => {
                       return (
                         <li
                           key={`table-item-${val.id}-${index}`}
                           className="table__item"
                         >
-                          {val.value !== -1 ? val.value : 0}
+                          {val.value !== -200 ? val.value : 0}
                         </li>
                       );
                     })}
               </ul>
-              <div className="table__bottom">{0}</div>
+              <div className="table__bottom">{item.total}</div>
             </div>
           );
         })}
