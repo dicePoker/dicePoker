@@ -16,13 +16,10 @@ export const Main = (props: MainProps): JSX.Element => {
 
   const showModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
-  const finishMove = (): void => {
-    props.gameController.finishMove();
-    showModal();
-  };
 
   return (
     <section className="main">
+      <p>Сейчас ходит {props.gameController.getCurrentPlayerName()}</p>
       <Grid
         container
         direction="column"
@@ -49,7 +46,7 @@ export const Main = (props: MainProps): JSX.Element => {
               size="medium"
               color="secondary"
               className={classes.button}
-              onClick={finishMove}
+              onClick={showModal}
             >
               Завершить
             </Button>
