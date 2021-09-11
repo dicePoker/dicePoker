@@ -3,12 +3,28 @@ import { getRandomCube } from '../utils/getRandomCube';
 
 const TOTAL_CUBES = 5;
 
+export interface PlayerResults {
+  playerName: string;
+  total: number;
+  firstPhasePoints: Record<string, number>[];
+  secondPhasePoints: Record<string, number>[];
+}
+
 export class GameController {
   private drawController: DrawController | undefined;
   private selectedValues: number[];
   private currentVals: number[];
-  public finishedVals: number[];
+  public finishedVals: number[] = [];
+  // public results: PlayerResults[] = [
+  //   {
+  //     playerName: 'Игрок 1',
+  //     total: 0,
+  //     firstPhasePoints: [{'Единицы', -1},{'Двойки', -1}]
+  //   }
+  // ];
   numberOfThrows = 2;
+  public currentPlayer = 0;
+  public phase = 1; // 1 или 2 - какая фаза игры идет
 
   constructor() {
     this.selectedValues = [];
@@ -74,5 +90,10 @@ export class GameController {
       this.drawController.removeCanvasClickListener(this.canvasClickHandler);
       this.drawController.setCanvasClickListener(this.canvasClickHandler);
     }
+  }
+
+  updateResult(evt: React.MouseEvent) {
+    console.log(evt.target.dataset.index);
+    //console.log(index, this.phase);
   }
 }
