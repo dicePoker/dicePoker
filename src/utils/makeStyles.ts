@@ -4,7 +4,7 @@ export const useStyles = makeStyles(theme => ({
   link: {
     marginTop: theme.spacing(6),
     textAlign: 'center',
-    color: '#1769AA',
+    color: '#000000',
   },
 
   button: {
@@ -26,13 +26,18 @@ export const useStyles = makeStyles(theme => ({
 
   buttonSignUpForm: {
     margin: 'auto',
-    marginTop: theme.spacing(6),
+    marginTop: '44px',
     width: '144px',
+    backgroundColor: '#5E2604',
+    '&:hover': {
+      backgroundColor: '#62402B',
+    },
   },
 
   large: {
     width: theme.spacing(7),
     height: theme.spacing(7),
+    margin: 'auto',
     marginBottom: theme.spacing(4),
   },
 
@@ -40,5 +45,33 @@ export const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(0),
     textAlign: 'center',
     color: '#1769AA',
+  },
+  formSignIn: {
+    width: '100%',
+  },
+  buttonSignInEntrance: {
+    width: '144px',
+    backgroundColor: '#5E2604',
+    marginTop: '44px',
+    margin: 'auto',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#62402B',
+    },
+  },
+
+  buttonSignInCreate: {
+    width: '144px',
+    backgroundColor: '#704829',
+    marginTop: '14px',
+    margin: 'auto',
+    '&:hover': {
+      backgroundColor: '#472D1D',
+    },
+  },
+  input: {
+    '&:focus': {
+      borderColor: '#9B6F37',
+    },
   },
 }));

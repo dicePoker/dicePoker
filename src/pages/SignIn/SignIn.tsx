@@ -4,7 +4,7 @@ import './SignIn.scss';
 
 export const SignIn = (): JSX.Element => {
   return (
-    <div className="sign-in">
+    <div className="sign-in page">
       <SignInForm />
     </div>
   );
