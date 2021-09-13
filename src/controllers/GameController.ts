@@ -347,10 +347,8 @@ export class GameController {
         this.currentPlayer
       ].secondPhasePoints.find(item => item.id === evt.target.dataset.comb);
       if (selectedComb && selectedComb.value === -200) {
-        selectedComb.value = this.calculateSum(
-          cubeValues,
-          evt.target.dataset.comb,
-        );
+        const points = this.calculateSum(cubeValues, evt.target.dataset.comb);
+        selectedComb.value = this.numberOfThrows === 2 ? points * 2 : points;
         this.finishMove();
         this.closeModalEmitter();
       }
@@ -374,7 +372,26 @@ export class GameController {
       if (this.phase === 1) {
         let sum = 0;
         player.firstPhasePoints.forEach(item => (sum += item.value));
-        player.total = sum;
+        switch (true) {
+          case sum >= 0 && sum <= 14:
+            player.total = 50;
+            break;
+          case sum >= 15 && sum <= 29:
+            player.total = 100;
+            break;
+          case sum >= 30:
+            player.total = 150;
+            break;
+          case sum >= -14 && sum <= -1:
+            player.total = -50;
+            break;
+          case sum >= -29 && sum <= -15:
+            player.total = -100;
+            break;
+          case sum <= -30:
+            player.total = -150;
+            break;
+        }
       } else {
         let sum = 0;
         player.secondPhasePoints.forEach(item => (sum += item.value));
