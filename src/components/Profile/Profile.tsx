@@ -13,6 +13,7 @@ import { changeProfileData, getUser } from '@/redux/actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateTypes, typeSubmitUserInfo } from '@/redux/types';
 import { useHistory } from 'react-router-dom';
+import { authorization } from '@/hoc/authorization';
 
 const validationSchema = yup.object({
   email: yup
@@ -37,7 +38,7 @@ const validationSchema = yup.object({
     .matches(phoneRegExp, 'Введите корректный номер телефона'),
 });
 
-export const Profile = (): JSX.Element => {
+const Profile = (): JSX.Element => {
   const classes = useStyles();
   const userInfo = useSelector((state: StateTypes) => state.userInfo);
   const isAuth = useSelector((state: StateTypes) => state.isAuth);
@@ -48,7 +49,6 @@ export const Profile = (): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isAuth) history.push('/signin/');
     dispatch(getUser());
   }, []);
 
@@ -115,3 +115,5 @@ export const Profile = (): JSX.Element => {
     </div>
   );
 };
+
+export default authorization(Profile);
