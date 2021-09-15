@@ -78,6 +78,6 @@ module.exports = {
         },
       ],
     }),
-    // new GenerateSW(),
+    new GenerateSW(),
   ],
 };
