@@ -1,25 +1,24 @@
 import { FormControl, TextField, Avatar, Button } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Profile.scss';
 import { useStyles } from '../../utils/makeStyles';
 import {
   getTextFieldsData,
   TextFieldsDataEnum,
-  TextFieldsDataType,
 } from '../../utils/getTextFieldsData';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { phoneRegExp } from '../../utils/constants/regExp';
+import { changeProfileData, getUser } from '@/redux/actions/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { StateTypes, typeSubmitUserInfo } from '@/redux/types';
+import { useHistory } from 'react-router-dom';
 
 const validationSchema = yup.object({
   email: yup
     .string()
     .email('Введите корректный адрес электронной почты')
     .required('Введите Email'),
-  password: yup
-    .string()
-    .min(8, 'Длина пароля должна быть не менее 8 символов')
-    .required('Введите пароль'),
   login: yup
     .string()
     .min(2, 'Длина логина должна быть не менее 2 символов')
@@ -32,7 +31,6 @@ const validationSchema = yup.object({
     .string()
     .min(2, 'Длина фамилии должна быть не менее 2 символов')
     .required('Введите фамилию'),
-
   phone: yup
     .string()
     .required('Введите номер телефона')
@@ -41,27 +39,47 @@ const validationSchema = yup.object({
 
 export const Profile = (): JSX.Element => {
   const classes = useStyles();
+  const userInfo = useSelector((state: StateTypes) => state.userInfo);
+  const isAuth = useSelector((state: StateTypes) => state.isAuth);
+  const history = useHistory();
+
   const textFieldsData = getTextFieldsData(TextFieldsDataEnum.profile);
-  const initialValues = (textFieldsData as []).reduce(
-    (acc: Record<string, string>, field: TextFieldsDataType) => {
-      return { ...acc, [field.name]: field.defaultValue as string };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!isAuth) history.push('/signin/');
+    dispatch(getUser());
+  }, []);
+
+  const initialValues: { [p: string]: string } = textFieldsData.reduce(
+    (acc, field) => {
+      return {
+        ...acc,
+        [field.name]: userInfo[field.name]
+          ? userInfo[field.name]?.toString()
+          : '',
+      };
     },
-    {} as Record<string, string>,
+    {},
   );
+
   const formik = useFormik({
     initialValues: {
       ...initialValues,
     },
     validationSchema: validationSchema,
     onSubmit: values => {
+      console.log('test changeProfileData');
       console.log(JSON.stringify(values, null, 2));
+      dispatch(changeProfileData(values as typeSubmitUserInfo));
     },
   });
 
   return (
     <div className="profile">
       <div className="profile__wrapper">
-        <h1 className="profile__title">Профмиль</h1>
+        <h1 className="profile__title">Профиль</h1>
         <Avatar className={classes.large}>H</Avatar>
         <FormControl
           component="form"
@@ -90,7 +108,7 @@ export const Profile = (): JSX.Element => {
             className={classes.buttonSignInEntrance}
             type="submit"
           >
-            Регистрация
+            Изменить
           </Button>
         </FormControl>
       </div>

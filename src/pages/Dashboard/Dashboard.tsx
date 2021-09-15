@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './Dashboard.scss';
-import sortList from './sortList.json';
+import { sortList } from './config';
 import { fetchUsers } from '../../redux/actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateTypes } from '../../redux/types';

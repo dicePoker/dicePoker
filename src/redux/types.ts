@@ -7,6 +7,18 @@ import {
   ActionSetIsAuth,
 } from './actions/types';
 
+export type typeSubmitUserInfo = userInfoType & { password: string };
+
+export type userInfoType = {
+  id?: number | string | null;
+  firstName: string | null;
+  secondName: string | null;
+  login: string | null;
+  email: string | null;
+  phone: string | null;
+  [key: string]: string | number | null | undefined;
+};
+
 export interface StateTypes {
   loading: number;
   isAuth: boolean;
@@ -16,14 +28,7 @@ export interface StateTypes {
     rating: string;
     record: string;
   }[];
-  userInfo: {
-    id: number | null;
-    first_name: string | null;
-    second_name: string | null;
-    login: string | null;
-    email: string | null;
-    phone: string | null;
-  };
+  userInfo: userInfoType;
 }
 
 export enum ActionTypes {

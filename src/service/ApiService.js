@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+axios.defaults.withCredentials = true;
 export let promiseGetUsers = {
   cancel: () => {},
 };
@@ -94,7 +94,8 @@ class ApiService {
       try {
         const { data, statusText, status } = await axios({
           method: 'GET',
-          url: `${this.URL}`, // TODO: поправить url
+          withCredentials: false,
+          url: `${this.URL}`,
           cancelToken: signal.token,
         });
 

@@ -1,4 +1,9 @@
-import { ActionType, ActionTypes, StateTypes } from '../types';
+import {
+  ActionType,
+  ActionTypes,
+  StateTypes,
+  typeSubmitUserInfo,
+} from '../types';
 import {
   ActionloadingFailed,
   ActionloadingSuccess,
@@ -60,14 +65,23 @@ const setIsAuth = (isAuth: boolean): ActionSetIsAuth => {
 };
 
 export const createNewUser =
-  (data: Omit<StateTypes['userInfo'], 'id'>): ThunkType =>
+  (data: typeSubmitUserInfo): ThunkType =>
   (dispatch, getState, apiService) => {
     dispatch(loadingSuccess());
+    const userData = {
+      first_name: data?.firstName,
+      second_name: data?.secondName,
+      login: data?.login,
+      email: data?.email,
+      password: data?.password,
+      phone: data?.phone,
+    };
     apiService
-      .createNewUser(data)
+      .createNewUser(userData)
       .then((response: { id: number }) => {
         const userInfo = { id: response?.id, ...data };
         dispatch(setUserInfo(userInfo));
+        dispatch(setIsAuth(true));
       })
       .catch(error => {
         console.log(error);
@@ -76,11 +90,22 @@ export const createNewUser =
   };
 
 export const changeProfileData =
-  (data: StateTypes['userInfo'] & { display_name: string }): ThunkType =>
+  (data: typeSubmitUserInfo): ThunkType =>
   (dispatch, getState, apiService) => {
     dispatch(loadingSuccess());
+    const userData = {
+      first_name: data?.firstName,
+      second_name: data?.secondName,
+      login: data?.login,
+      email: data?.email,
+      phone: data?.phone,
+    };
     apiService
-      .changeProfileData({ ...data, display_name: data.login })
+      .changeProfileData({
+        ...userData,
+        display_name: data.login,
+        id: getState().userInfo.id,
+      })
       .then((response: StateTypes['userInfo']) => {
         dispatch(setUserInfo(response));
       })
@@ -124,8 +149,17 @@ export const getUser = (): ThunkType => (dispatch, getState, apiService) => {
   dispatch(loadingSuccess());
   apiService
     .getUser()
-    .then((response: StateTypes['userInfo']) => {
-      dispatch(setUserInfo(response));
+    .then(response => {
+      const userInfo: StateTypes['userInfo'] = {
+        id: response.id,
+        firstName: response.first_name,
+        secondName: response.second_name,
+        login: response.login,
+        email: response.email,
+        phone: response.phone,
+      };
+      dispatch(setUserInfo(userInfo));
+      dispatch(setIsAuth(true));
     })
     .catch(error => {
       console.log(error);

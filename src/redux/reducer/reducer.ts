@@ -6,8 +6,8 @@ const initialState: StateTypes = {
   users: [],
   userInfo: {
     id: null,
-    first_name: null,
-    second_name: null,
+    firstName: null,
+    secondName: null,
     login: null,
     email: null,
     phone: null,

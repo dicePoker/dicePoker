@@ -5,11 +5,6 @@ export default [
     defaultValue: 'User login',
   },
   {
-    name: 'password',
-    label: 'Пароль',
-    defaultValue: 'User password',
-  },
-  {
     name: 'email',
     label: 'E-mail',
     type: 'email',
@@ -22,7 +17,7 @@ export default [
   },
   {
     name: 'secondName',
-    label: 'Пароль',
+    label: 'Фамилия',
     defaultValue: 'User second name',
   },
   {
