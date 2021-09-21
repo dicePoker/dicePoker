@@ -99,7 +99,7 @@ export interface PlayerResults {
 }
 
 export class GameController {
-  private drawController: DrawController | undefined;
+  private drawController: DrawController;
   private selectedValues: number[];
   private currentVals: number[];
   public finishedVals: number[] = [];
@@ -126,6 +126,7 @@ export class GameController {
   constructor() {
     this.selectedValues = [];
     this.currentVals = [];
+    this.drawController = new DrawController();
     this.canvasClickHandler = this.canvasClickHandler.bind(this);
     this.makeThrow = this.makeThrow.bind(this);
     this.updateResult = this.updateResult.bind(this);
@@ -164,14 +165,16 @@ export class GameController {
       this.currentVals = vals;
       this.drawController.drawTopRow(vals);
       this.numberOfThrows--;
-      console.log(this.numberOfThrows);
     }
   }
 
   canvasClickHandler(event: Event): void {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const x = event.offsetX;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const y = event.offsetY; // координаты клика по канвасу
-    console.log('x: ' + x + ' y: ' + y);
     const clicked = this.drawController.getClickedTopRowCubeIndex(
       x,
       y,
@@ -315,18 +318,20 @@ export class GameController {
   }
 
   updateResult(evt: React.MouseEvent) {
-    console.log(evt.target.dataset.comb);
     const cubeValues: number[] = [];
     this.selectedValues.forEach(item => cubeValues.push(item));
     this.currentVals.forEach(item => cubeValues.push(item));
-    console.log(cubeValues);
     if (this.phase === 1) {
       const selectedComb = this.gameResults[
         this.currentPlayer
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
       ].firstPhasePoints.find(item => item.id === evt.target.dataset.comb);
       if (selectedComb && selectedComb.value === -200) {
         selectedComb.value = this.calculateSum(
           cubeValues,
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           evt.target.dataset.comb,
         );
 
@@ -345,8 +350,12 @@ export class GameController {
     } else {
       const selectedComb = this.gameResults[
         this.currentPlayer
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
       ].secondPhasePoints.find(item => item.id === evt.target.dataset.comb);
       if (selectedComb && selectedComb.value === -200) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         const points = this.calculateSum(cubeValues, evt.target.dataset.comb);
         selectedComb.value = this.numberOfThrows === 2 ? points * 2 : points;
         this.finishMove();
@@ -400,7 +409,8 @@ export class GameController {
     });
   }
 
-  setCloseModal(callback) {
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  setCloseModal(callback: () => void) {
     this.closeModalEmitter = callback;
   }
 }

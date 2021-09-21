@@ -11,6 +11,7 @@ import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Loader from '../Loader';
 import { StateTypes } from '@/redux/types';
 import { useSelector } from 'react-redux';
+import { MainPage } from '@/pages/MainPage/MainPage';
 
 export const App = (): JSX.Element => {
   const loading = useSelector((state: StateTypes) => state.loading);
@@ -26,6 +27,7 @@ export const App = (): JSX.Element => {
         {/*  }}*/}
         {/*/>*/}
         <Switch>
+          <Route path="/main/" component={MainPage} />
           <Route path="/signin/" component={SignIn} />
           <Route path="/signup/" component={SignUp} />
           <Route path="/dashboard/" component={Dashboard} />

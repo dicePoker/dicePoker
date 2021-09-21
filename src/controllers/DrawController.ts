@@ -7,23 +7,24 @@ const MARGIN = 10;
 
 export class DrawController {
   public canvas: HTMLCanvasElement;
-  ctx: CanvasRenderingContext2D;
+  public ctx: CanvasRenderingContext2D;
   private readonly pixelRatio: number;
   // TODO: пофиксить разрешение https://medium.com/wdstack/fixing-html5-2d-canvas-blur-8ebe27db07da
 
-  constructor(canvas: HTMLCanvasElement) {
-    //this.pixelRatio = window.devicePixelRatio || 1;
+  constructor(canvas?: HTMLCanvasElement) {
     this.pixelRatio = 1;
-    this.canvas = canvas;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    this.ctx = this.canvas.getContext('2d');
-    // this.canvas.width = this.canvas.width * this.pixelRatio;
-    // this.canvas.height = this.canvas.height * this.pixelRatio;
-    this.ctx.fillStyle = '#40D360';
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.setCanvasClickListener = this.setCanvasClickListener.bind(this);
-    this.removeCanvasClickListener = this.removeCanvasClickListener.bind(this);
+    if (canvas) {
+      this.canvas = canvas;
+      this.ctx = this.canvas.getContext('2d') ?? new CanvasRenderingContext2D();
+      this.ctx.fillStyle = '#40D360';
+      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+      this.setCanvasClickListener = this.setCanvasClickListener.bind(this);
+      this.removeCanvasClickListener =
+        this.removeCanvasClickListener.bind(this);
+    } else {
+      this.canvas = new HTMLCanvasElement();
+      this.ctx = new CanvasRenderingContext2D();
+    }
   }
 
   drawCube(topLeftX: number, topLeftY: number, val: number): void {
@@ -167,7 +168,7 @@ export class DrawController {
     });
   }
 
-  // рисуем верхний ряд
+  // рисуем нижний ряд
   drawBottomRow(values: number[]): void {
     values.forEach((item, index) => {
       this.drawCube(
@@ -190,7 +191,7 @@ export class DrawController {
     x: number,
     y: number,
     topRowQuantity: number,
-  ): void {
+  ): number {
     // хз почему нужно умножать на 4 координаты при клике
     if (y < MARGIN * 4 || y > (MARGIN + CUBE_SIZE) * 4) {
       // кликнули не по кубику по высоте
