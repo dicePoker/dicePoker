@@ -53,14 +53,12 @@ const Profile = (): JSX.Element => {
   }, []);
 
   const initialValues: { [p: string]: string } = textFieldsData.reduce(
-    (acc, field) => {
-      return {
-        ...acc,
-        [field.name]: userInfo[field.name]
-          ? userInfo[field.name]?.toString()
-          : '',
-      };
-    },
+    (acc, field) => ({
+      ...acc,
+      [field.name]: userInfo[field.name]
+        ? userInfo[field.name]?.toString()
+        : '',
+    }),
     {},
   );
 
@@ -70,8 +68,6 @@ const Profile = (): JSX.Element => {
     },
     validationSchema: validationSchema,
     onSubmit: values => {
-      console.log('test changeProfileData');
-      console.log(JSON.stringify(values, null, 2));
       dispatch(changeProfileData(values as typeSubmitUserInfo));
     },
   });

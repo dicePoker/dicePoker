@@ -50,19 +50,15 @@ const setUsers = (users: StateTypes['users']): ActionSetUsers => {
   };
 };
 
-const setUserInfo = (userInfo: StateTypes['userInfo']): ActionSetUserInfo => {
-  return {
-    type: ActionTypes.SET_USER_INFO,
-    payload: userInfo,
-  };
-};
+const setUserInfo = (userInfo: StateTypes['userInfo']): ActionSetUserInfo => ({
+  type: ActionTypes.SET_USER_INFO,
+  payload: userInfo,
+});
 
-const setIsAuth = (isAuth: boolean): ActionSetIsAuth => {
-  return {
-    type: ActionTypes.SET_IS_AUTH,
-    payload: isAuth,
-  };
-};
+const setIsAuth = (isAuth: boolean): ActionSetIsAuth => ({
+  type: ActionTypes.SET_IS_AUTH,
+  payload: isAuth,
+});
 
 export const createNewUser =
   (data: typeSubmitUserInfo): ThunkType =>
