@@ -7,24 +7,18 @@ const MARGIN = 10;
 
 export class DrawController {
   public canvas: HTMLCanvasElement;
-  public ctx: CanvasRenderingContext2D;
-  private readonly pixelRatio: number;
+  ctx: CanvasRenderingContext2D;
   // TODO: пофиксить разрешение https://medium.com/wdstack/fixing-html5-2d-canvas-blur-8ebe27db07da
 
-  constructor(canvas?: HTMLCanvasElement) {
-    this.pixelRatio = 1;
-    if (canvas) {
-      this.canvas = canvas;
-      this.ctx = this.canvas.getContext('2d') ?? new CanvasRenderingContext2D();
-      this.ctx.fillStyle = '#40D360';
-      this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-      this.setCanvasClickListener = this.setCanvasClickListener.bind(this);
-      this.removeCanvasClickListener =
-        this.removeCanvasClickListener.bind(this);
-    } else {
-      this.canvas = new HTMLCanvasElement();
-      this.ctx = new CanvasRenderingContext2D();
-    }
+  constructor(canvas: HTMLCanvasElement) {
+    this.canvas = canvas;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.ctx = this.canvas.getContext('2d');
+    this.ctx.fillStyle = '#40D360';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.setCanvasClickListener = this.setCanvasClickListener.bind(this);
+    this.removeCanvasClickListener = this.removeCanvasClickListener.bind(this);
   }
 
   drawCube(topLeftX: number, topLeftY: number, val: number): void {

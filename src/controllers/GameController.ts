@@ -99,7 +99,7 @@ export interface PlayerResults {
 }
 
 export class GameController {
-  private drawController: DrawController;
+  private drawController: DrawController | undefined;
   private selectedValues: number[];
   private currentVals: number[];
   public finishedVals: number[] = [];
@@ -126,7 +126,6 @@ export class GameController {
   constructor() {
     this.selectedValues = [];
     this.currentVals = [];
-    this.drawController = new DrawController();
     this.canvasClickHandler = this.canvasClickHandler.bind(this);
     this.makeThrow = this.makeThrow.bind(this);
     this.updateResult = this.updateResult.bind(this);
@@ -137,11 +136,17 @@ export class GameController {
   }
 
   init(): void {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     this.drawController.clearCanvas();
     for (let i = 0; i < TOTAL_CUBES; i++) {
       this.currentVals.push(getRandomCube());
     }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     this.drawController.drawTopRow(this.currentVals);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     this.drawController.setCanvasClickListener(this.canvasClickHandler);
     this.numberOfThrows = 2;
     this.finishedVals = [];
@@ -163,6 +168,8 @@ export class GameController {
         vals.push(getRandomCube());
       }
       this.currentVals = vals;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       this.drawController.drawTopRow(vals);
       this.numberOfThrows--;
     }
@@ -175,6 +182,8 @@ export class GameController {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const y = event.offsetY; // координаты клика по канвасу
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const clicked = this.drawController.getClickedTopRowCubeIndex(
       x,
       y,
@@ -182,14 +191,24 @@ export class GameController {
     );
     if (clicked >= 0) {
       const clickedValue = this.currentVals[clicked];
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       this.drawController.clearCanvas();
       this.currentVals = this.currentVals.filter(
         (item, index) => index !== clicked,
       );
       this.selectedValues.push(clickedValue);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       this.drawController.drawTopRow(this.currentVals);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       this.drawController.drawBottomRow(this.selectedValues);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       this.drawController.removeCanvasClickListener(this.canvasClickHandler);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       this.drawController.setCanvasClickListener(this.canvasClickHandler);
     }
   }
