@@ -18,7 +18,7 @@ export const useStyles = makeStyles(theme => ({
 
   buttonSignUp: {
     margin: 'auto',
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(5),
     width: '144px',
     backgroundColor: '#E3F2FD',
     color: '#2196F3',
@@ -41,6 +41,11 @@ export const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(4),
   },
 
+  headerLink: {
+    marginTop: theme.spacing(0),
+    textAlign: 'center',
+    color: '#1769AA',
+  },
   formSignIn: {
     width: '100%',
   },
