@@ -27,12 +27,12 @@ export const App = (): JSX.Element => {
         {/*  }}*/}
         {/*/>*/}
         <Switch>
-          <Route path="/main/" component={MainPage} />
-          <Route path="/signin/" component={SignIn} />
-          <Route path="/signup/" component={SignUp} />
-          <Route path="/dashboard/" component={Dashboard} />
-          <Route path="/forum/" component={Forum} />
-          <Route path="/profile/" component={ProfilePage} />
+          <Route path="/main" component={MainPage} />
+          <Route path="/signin" component={SignIn} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/forum" component={Forum} />
+          <Route path="/profile" component={ProfilePage} />
           <Redirect to={'/signin'} />
         </Switch>
       </div>

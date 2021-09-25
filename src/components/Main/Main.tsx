@@ -65,9 +65,9 @@ export const Main = (props: MainProps): JSX.Element => {
           </li>
         </ul>
       </Grid>
-      <Modal isShow={isShowModal} closeHandle={closeModal}>
-        <Table gameController={props.gameController} />
-      </Modal>
+      {/*<Modal isShow={isShowModal} closeHandle={closeModal}>*/}
+      {/*  <Table gameController={props.gameController} />*/}
+      {/*</Modal>*/}
     </section>
   );
 };
