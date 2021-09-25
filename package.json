@@ -12,7 +12,7 @@
     "heroku-prebuild": "npm install --dev",
     "lint": "eslint --fix --ext .ts,.tsx --ignore-path .gitignore . && stylelint \"**/*.scss\" --fix  --config .stylelintrc.json",
     "precommit:hook": "npm run format",
-    "dev": " webpack serve",
+    "dev": " webpack serve --mode development --hot",
     "prettier": "prettier --write \"**/*.{ts,js,jxs,tsx,json,scss}\"",
     "format": "npm run prettier && npm run lint"
   },
