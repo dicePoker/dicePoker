@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import './Dashboard.scss';
-import sortList from './sortList.json';
+import { sortList } from './config';
 import { fetchUsers } from '../../redux/actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { StateTypes } from '../../redux/types';
+import { authorization } from '@/hoc/authorization';
 
-export const Dashboard = (): JSX.Element => {
+const Dashboard = (): JSX.Element => {
   const usersData = useSelector((state: StateTypes) => state.users);
   const dispatch = useDispatch();
 
@@ -40,3 +41,5 @@ export const Dashboard = (): JSX.Element => {
     </div>
   );
 };
+
+export default authorization(Dashboard);

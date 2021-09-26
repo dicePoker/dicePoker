@@ -2,7 +2,16 @@ import { ActionType, ActionTypes, StateTypes } from '../types';
 
 const initialState: StateTypes = {
   loading: 0,
+  isAuth: false,
   users: [],
+  userInfo: {
+    id: null,
+    firstName: null,
+    secondName: null,
+    login: null,
+    email: null,
+    phone: null,
+  },
 };
 
 const reducer = (state = initialState, action: ActionType): StateTypes => {
@@ -28,6 +37,18 @@ const reducer = (state = initialState, action: ActionType): StateTypes => {
       return {
         ...state,
         users: action.payload,
+      };
+
+    case ActionTypes.SET_USER_INFO:
+      return {
+        ...state,
+        userInfo: action.payload,
+      };
+
+    case ActionTypes.SET_IS_AUTH:
+      return {
+        ...state,
+        isAuth: action.payload,
       };
 
     default:

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, FormControl, Link, TextField } from '@material-ui/core';
 import './SignInForm.scss';
 import { useStyles } from '../../utils/makeStyles';
@@ -9,6 +9,10 @@ import {
 } from '../../utils/getTextFieldsData';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { StateTypes } from '@/redux/types';
+import { useHistory } from 'react-router-dom';
+import { authorization } from '@/redux/actions/actions';
 
 const validationSchema = yup.object({
   password: yup
@@ -25,6 +29,16 @@ export const SignInForm = (): JSX.Element => {
   const classes = useStyles();
 
   const textFieldsData = getTextFieldsData(TextFieldsDataEnum.signIn);
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state: StateTypes) => state.isAuth);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (isAuth) {
+      history.push('/profile/');
+    }
+  }, [isAuth]);
+
   const initialValues = textFieldsData.reduce(
     (acc: Record<string, string>, field: TextFieldsDataType) => {
       return { ...acc, [field.name]: '' };
@@ -38,6 +52,7 @@ export const SignInForm = (): JSX.Element => {
     validationSchema: validationSchema,
     onSubmit: values => {
       console.log(JSON.stringify(values, null, 2));
+      dispatch(authorization(values as { login: string; password: string }));
     },
   });
 
@@ -57,7 +72,6 @@ export const SignInForm = (): JSX.Element => {
               name={item.name}
               label={item.label}
               type={item.type ? item.type : 'text'}
-              defaultValue={item.defaultValue}
               value={formik.values[item.name]}
               onChange={formik.handleChange}
               className={classes.input}
