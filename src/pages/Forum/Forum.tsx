@@ -1,7 +1,8 @@
+import { authorization } from '@/hoc/authorization';
 import React from 'react';
 import './Forum.scss';
 
-export const Forum = (): JSX.Element => {
+const Forum = (): JSX.Element => {
   return (
     <div className="forum">
       <h1 className="forum__title">Форум</h1>
@@ -24,3 +25,5 @@ export const Forum = (): JSX.Element => {
     </div>
   );
 };
+
+export default authorization(Forum);

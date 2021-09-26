@@ -1,13 +1,91 @@
 import axios from 'axios';
-
+axios.defaults.withCredentials = true;
 export let promiseGetUsers = {
   cancel: () => {},
 };
 
 class ApiService {
   constructor() {
-    // TODO: вписать url
-    this.URL = 'https://...';
+    this.URL = 'https://ya-praktikum.tech/api/v2';
+    this.headers = { 'Content-Type': 'application/json' };
+  }
+
+  async createNewUser(data) {
+    const response = await axios.post(`${this.URL}/auth/signup`, data, {
+      headers: this.headers,
+    });
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return Promise.reject(
+        `failed to fetch createNewUser. status: ${response.status}`,
+      );
+    }
+  }
+
+  async authorization(data) {
+    const response = await axios.post(`${this.URL}/auth/signin`, data, {
+      headers: this.headers,
+    });
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return Promise.reject(
+        `failed to fetch authorization. status: ${response.status}`,
+      );
+    }
+  }
+
+  async logout() {
+    const response = await axios.post(
+      `${this.URL}/auth/logout`,
+      {},
+      { headers: this.headers },
+    );
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return Promise.reject(
+        `failed to fetch logout. status: ${response.status}`,
+      );
+    }
+  }
+
+  async getUser() {
+    const response = await axios.get(`${this.URL}/auth/user`);
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return Promise.reject(
+        `failed to fetch getUser. status: ${response.status}`,
+      );
+    }
+  }
+
+  async changeProfileData(data) {
+    const response = await axios.put(`${this.URL}/user/profile`, data, {
+      headers: this.headers,
+    });
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return Promise.reject(
+        `failed to fetch changeProfileData. status: ${response.status}`,
+      );
+    }
+  }
+
+  async changePassword(data) {
+    const response = await axios.put(`${this.URL}/user/password`, data, {
+      headers: this.headers,
+    });
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      return Promise.reject(
+        `failed to fetch changeProfileData. status: ${response.status}`,
+      );
+    }
   }
 
   getUsers = () => {
@@ -16,7 +94,8 @@ class ApiService {
       try {
         const { data, statusText, status } = await axios({
           method: 'GET',
-          url: `${this.URL}`, // TODO: поправить url
+          withCredentials: false,
+          url: `${this.URL}`,
           cancelToken: signal.token,
         });
 

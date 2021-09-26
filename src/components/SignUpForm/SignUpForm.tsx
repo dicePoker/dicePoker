@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './SignUpForm.scss';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -10,6 +10,10 @@ import {
   TextFieldsDataType,
 } from '../../utils/getTextFieldsData';
 import { phoneRegExp } from '../../utils/constants/regExp';
+import { createNewUser } from '@/redux/actions/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { StateTypes, typeSubmitUserInfo } from '@/redux/types';
+import { useHistory } from 'react-router-dom';
 
 const validationSchema = yup.object({
   email: yup
@@ -40,8 +44,18 @@ const validationSchema = yup.object({
 });
 
 export const SignUpForm = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const isAuth = useSelector((state: StateTypes) => state.isAuth);
+  const history = useHistory();
   const classes = useStyles();
   const textFieldsData = getTextFieldsData(TextFieldsDataEnum.signUp);
+
+  useEffect(() => {
+    if (isAuth) {
+      history.push('/profile/');
+    }
+  }, [isAuth]);
+
   const initialValues = (textFieldsData as []).reduce(
     (acc: Record<string, string>, field: TextFieldsDataType) => {
       return { ...acc, [field.name]: '' };
@@ -55,6 +69,7 @@ export const SignUpForm = (): JSX.Element => {
     validationSchema: validationSchema,
     onSubmit: values => {
       console.log(JSON.stringify(values, null, 2));
+      dispatch(createNewUser(values as typeSubmitUserInfo));
     },
   });
 
@@ -75,7 +90,6 @@ export const SignUpForm = (): JSX.Element => {
                 name={item.name}
                 label={item.label}
                 type={item.type ? item.type : 'text'}
-                defaultValue={item.defaultValue}
                 value={formik.values[item.name]}
                 onChange={formik.handleChange}
                 error={
