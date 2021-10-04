@@ -51,7 +51,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
-        test: /\.(png|jpg|jpeg|gif|mp3)$/,
+        test: /\.(png|jpg|jpeg|gif|mp3|wav)$/,
         type: 'asset/resource',
       },
       {

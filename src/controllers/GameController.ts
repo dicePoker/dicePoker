@@ -2,6 +2,8 @@ import { DrawController } from './DrawController';
 import { getRandomCube } from '../utils/getRandomCube';
 import { cloneDeep } from 'lodash';
 
+import roll from 'src/static/assets/audio/roll.wav';
+
 const TOTAL_CUBES = 5;
 
 const FIRST_PHASE_COMBINATIONS = [
@@ -103,6 +105,7 @@ export class GameController {
   private selectedValues: number[];
   private currentVals: number[];
   public finishedVals: number[] = [];
+  private audioRoll = new Audio(roll);
 
   public closeModalEmitter: any;
   public gameResults = [
@@ -168,6 +171,7 @@ export class GameController {
         vals.push(getRandomCube());
       }
       this.currentVals = vals;
+      this.audioRoll.play();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       this.drawController.drawTopRow(vals);

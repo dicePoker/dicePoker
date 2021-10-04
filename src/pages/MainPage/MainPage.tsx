@@ -38,7 +38,7 @@ export class MainPage extends PureComponent {
     return (
       <div className="main-page">
         <Main gameController={this.gameController} />
-        <Modal isShow={this.state.isShowModal}>
+        <Modal isShow={this.state.isShowModal} closeHandle={this.closeModal}>
           <Pause clickHandler={() => this.closeModal()} />
         </Modal>
       </div>

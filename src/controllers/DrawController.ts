@@ -222,6 +222,8 @@ export class DrawController {
   }
 
   clearCanvas(): void {
+    console.log(this.ctx);
+    console.log(this.canvas);
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.fillStyle = '#40D360';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
