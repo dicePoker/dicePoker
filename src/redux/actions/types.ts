@@ -26,3 +26,8 @@ export interface ActionSetIsAuth {
   type: ActionTypes.SET_IS_AUTH;
   payload: boolean;
 }
+
+export interface ActionSetGameResult {
+  type: ActionTypes.SET_GAME_RESULT;
+  payload: StateTypes['gameResult'];
+}

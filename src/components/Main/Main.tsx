@@ -5,6 +5,7 @@ import { Button, Grid } from '@material-ui/core';
 import { Modal } from '../Modal/Modal';
 import { Table } from '../Table/Table';
 import { GameController } from '../../controllers/GameController';
+import { useDispatch } from 'react-redux';
 
 export type MainProps = {
   gameController: GameController;
@@ -16,8 +17,10 @@ export const Main = (props: MainProps): JSX.Element => {
 
   const showModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
+  const dispatch = useDispatch();
 
   props.gameController.setCloseModal(closeModal);
+  props.gameController.setDispatch(dispatch);
 
   return (
     <section className="main">
