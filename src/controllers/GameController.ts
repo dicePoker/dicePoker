@@ -1,6 +1,12 @@
 import { DrawController } from './DrawController';
 import { getRandomCube } from '../utils/getRandomCube';
 import { cloneDeep } from 'lodash';
+import { setGameResult } from '@/redux/actions/actions';
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import roll from 'src/static/assets/audio/roll.wav';
+import { Dispatch } from 'react';
 
 const TOTAL_CUBES = 5;
 
@@ -85,6 +91,8 @@ const SECOND_PHASE_COMBINATIONS = [
   },
 ];
 
+const TOTAL_COMBS = 15;
+
 export type Combination = {
   id: string;
   label: string;
@@ -102,7 +110,8 @@ export class GameController {
   private drawController: DrawController | undefined;
   private selectedValues: number[];
   private currentVals: number[];
-  public finishedVals: number[] = [];
+  private remainCombs: number = TOTAL_COMBS * 2;
+  private audioRoll = new Audio(roll);
 
   public closeModalEmitter: any;
   public gameResults = [
@@ -122,6 +131,7 @@ export class GameController {
   numberOfThrows = 2;
   public currentPlayer = 0;
   public phase = 1; // 1 или 2 - какая фаза игры идет
+  private dispatch: Dispatch<any> | undefined;
 
   constructor() {
     this.selectedValues = [];
@@ -149,7 +159,7 @@ export class GameController {
     // @ts-ignore
     this.drawController.setCanvasClickListener(this.canvasClickHandler);
     this.numberOfThrows = 2;
-    this.finishedVals = [];
+    this.remainCombs = TOTAL_COMBS * 2;
   }
 
   finishMove(): void {
@@ -168,6 +178,7 @@ export class GameController {
         vals.push(getRandomCube());
       }
       this.currentVals = vals;
+      this.audioRoll.play();
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       this.drawController.drawTopRow(vals);
@@ -364,6 +375,7 @@ export class GameController {
           this.phase = 2;
         }
         this.finishMove();
+        this.remainCombs--;
         this.closeModalEmitter();
       }
     } else {
@@ -378,7 +390,24 @@ export class GameController {
         const points = this.calculateSum(cubeValues, evt.target.dataset.comb);
         selectedComb.value = this.numberOfThrows === 2 ? points * 2 : points;
         this.finishMove();
+        this.remainCombs--;
         this.closeModalEmitter();
+        if (this.remainCombs === 0) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          this.dispatch(
+            setGameResult({
+              firstPlayer: {
+                name: this.gameResults[0].playerName,
+                points: this.gameResults[0].total,
+              },
+              secondPlayer: {
+                name: this.gameResults[1].playerName,
+                points: this.gameResults[1].total,
+              },
+            }),
+          );
+        }
       }
     }
   }
@@ -431,5 +460,10 @@ export class GameController {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   setCloseModal(callback: () => void) {
     this.closeModalEmitter = callback;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+  setDispatch(dispatch: Dispatch<any>) {
+    this.dispatch = dispatch;
   }
 }

@@ -5,6 +5,7 @@ import {
   ActionSetUsers,
   ActionSetUserInfo,
   ActionSetIsAuth,
+  ActionSetGameResult,
 } from './actions/types';
 
 export type typeSubmitUserInfo = userInfoType & { password: string };
@@ -19,9 +20,20 @@ export type userInfoType = {
   [key: string]: string | number | null | undefined;
 };
 
+export type userResult = {
+  name: string;
+  points: number;
+};
+
+export type gameResult = {
+  firstPlayer: userResult;
+  secondPlayer: userResult;
+};
+
 export interface StateTypes {
   loading: number;
   isAuth: boolean;
+  gameResult: gameResult;
   users: {
     id: string;
     name: string;
@@ -38,6 +50,7 @@ export enum ActionTypes {
   SET_USERS = 'SET_USERS',
   SET_USER_INFO = 'SET_USER_INFO',
   SET_IS_AUTH = 'SET_IS_AUTH',
+  SET_GAME_RESULT = 'SET_GAME_RESULT',
 }
 
 export type ActionType =
@@ -46,4 +59,5 @@ export type ActionType =
   | ActionloadingFailed
   | ActionSetUsers
   | ActionSetUserInfo
-  | ActionSetIsAuth;
+  | ActionSetIsAuth
+  | ActionSetGameResult;

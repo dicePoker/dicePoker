@@ -1,6 +1,7 @@
 import {
   ActionType,
   ActionTypes,
+  gameResult,
   StateTypes,
   typeSubmitUserInfo,
 } from '../types';
@@ -8,6 +9,7 @@ import {
   ActionloadingFailed,
   ActionloadingSuccess,
   ActionResetLoading,
+  ActionSetGameResult,
   ActionSetIsAuth,
   ActionSetUserInfo,
   ActionSetUsers,
@@ -175,3 +177,10 @@ export const fetchUsers = (): ThunkType => (dispatch, getState, apiService) => {
     })
     .finally(() => dispatch(loadingFailed()));
 };
+
+export const setGameResult = (
+  gameResult: StateTypes['gameResult'],
+): ActionSetGameResult => ({
+  type: ActionTypes.SET_GAME_RESULT,
+  payload: gameResult,
+});

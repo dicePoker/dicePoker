@@ -5,6 +5,7 @@ import { Button, Grid } from '@material-ui/core';
 import { Modal } from '../Modal/Modal';
 import { Table } from '../Table/Table';
 import { GameController } from '../../controllers/GameController';
+import { useDispatch } from 'react-redux';
 
 export type MainProps = {
   gameController: GameController;
@@ -16,8 +17,10 @@ export const Main = (props: MainProps): JSX.Element => {
 
   const showModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
+  const dispatch = useDispatch();
 
   props.gameController.setCloseModal(closeModal);
+  props.gameController.setDispatch(dispatch);
 
   return (
     <section className="main">
@@ -34,9 +37,8 @@ export const Main = (props: MainProps): JSX.Element => {
             <Button
               variant="contained"
               size="medium"
-              color="primary"
               disabled={props.gameController.numberOfThrows === 0}
-              className={classes.button}
+              className={classes.buttonMain}
               onClick={props.gameController.makeThrow}
             >
               Перебросить
@@ -46,8 +48,7 @@ export const Main = (props: MainProps): JSX.Element => {
             <Button
               variant="contained"
               size="medium"
-              color="secondary"
-              className={classes.button}
+              className={classes.buttonMain}
               onClick={showModal}
             >
               Завершить
@@ -57,7 +58,7 @@ export const Main = (props: MainProps): JSX.Element => {
             <Button
               variant="contained"
               size="medium"
-              className={classes.button}
+              className={classes.buttonMain}
               onClick={showModal}
             >
               Таблица
@@ -65,9 +66,9 @@ export const Main = (props: MainProps): JSX.Element => {
           </li>
         </ul>
       </Grid>
-      {/*<Modal isShow={isShowModal} closeHandle={closeModal}>*/}
-      {/*  <Table gameController={props.gameController} />*/}
-      {/*</Modal>*/}
+      <Modal isShow={isShowModal} closeHandle={closeModal}>
+        <Table gameController={props.gameController} />
+      </Modal>
     </section>
   );
 };

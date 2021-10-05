@@ -15,7 +15,7 @@ export class DrawController {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this.ctx = this.canvas.getContext('2d');
-    this.ctx.fillStyle = '#40D360';
+    this.ctx.fillStyle = '#c5a078';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.setCanvasClickListener = this.setCanvasClickListener.bind(this);
     this.removeCanvasClickListener = this.removeCanvasClickListener.bind(this);
@@ -223,7 +223,7 @@ export class DrawController {
 
   clearCanvas(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    this.ctx.fillStyle = '#40D360';
+    this.ctx.fillStyle = '#c5a078';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 }

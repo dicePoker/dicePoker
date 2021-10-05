@@ -4,6 +4,16 @@ const initialState: StateTypes = {
   loading: 0,
   isAuth: false,
   users: [],
+  gameResult: {
+    firstPlayer: {
+      name: 'Игрок 1',
+      points: 0,
+    },
+    secondPlayer: {
+      name: 'Игрок 2',
+      points: 0,
+    },
+  },
   userInfo: {
     id: null,
     firstName: null,
@@ -49,6 +59,12 @@ const reducer = (state = initialState, action: ActionType): StateTypes => {
       return {
         ...state,
         isAuth: action.payload,
+      };
+
+    case ActionTypes.SET_GAME_RESULT:
+      return {
+        ...state,
+        gameResult: action.payload,
       };
 
     default:
