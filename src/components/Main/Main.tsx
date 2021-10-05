@@ -34,9 +34,8 @@ export const Main = (props: MainProps): JSX.Element => {
             <Button
               variant="contained"
               size="medium"
-              color="primary"
               disabled={props.gameController.numberOfThrows === 0}
-              className={classes.button}
+              className={classes.buttonMain}
               onClick={props.gameController.makeThrow}
             >
               Перебросить
@@ -46,8 +45,7 @@ export const Main = (props: MainProps): JSX.Element => {
             <Button
               variant="contained"
               size="medium"
-              color="secondary"
-              className={classes.button}
+              className={classes.buttonMain}
               onClick={showModal}
             >
               Завершить
@@ -57,7 +55,7 @@ export const Main = (props: MainProps): JSX.Element => {
             <Button
               variant="contained"
               size="medium"
-              className={classes.button}
+              className={classes.buttonMain}
               onClick={showModal}
             >
               Таблица

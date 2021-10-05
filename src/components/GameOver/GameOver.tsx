@@ -3,12 +3,18 @@ import './GameOver.scss';
 
 import ChestImage from 'src/static/assets/img/chest.png';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import hooray from 'src/static/assets/audio/hooray.wav';
+
 type GameOverType = {
   title: string;
   handlerClick(): void;
 };
 
 export const GameOver = (props: GameOverType): JSX.Element => {
+  const audioHooray = new Audio(hooray);
+
   return (
     <div className="game-over">
       <h2 className="game-over__title">Победил !</h2>

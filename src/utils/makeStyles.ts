@@ -24,6 +24,15 @@ export const useStyles = makeStyles(theme => ({
     color: '#2196F3',
   },
 
+  buttonMain: {
+    margin: 'auto',
+    marginTop: theme.spacing(5),
+    width: '144px',
+    backgroundColor: '#704829',
+    color: '#ffffff',
+    textTransform: 'uppercase',
+  },
+
   buttonSignUpForm: {
     margin: 'auto',
     marginTop: '44px',

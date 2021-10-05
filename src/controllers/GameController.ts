@@ -2,6 +2,8 @@ import { DrawController } from './DrawController';
 import { getRandomCube } from '../utils/getRandomCube';
 import { cloneDeep } from 'lodash';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import roll from 'src/static/assets/audio/roll.wav';
 
 const TOTAL_CUBES = 5;
@@ -87,6 +89,8 @@ const SECOND_PHASE_COMBINATIONS = [
   },
 ];
 
+const TOTAL_COMBS = 15;
+
 export type Combination = {
   id: string;
   label: string;
@@ -104,7 +108,7 @@ export class GameController {
   private drawController: DrawController | undefined;
   private selectedValues: number[];
   private currentVals: number[];
-  public finishedVals: number[] = [];
+  private remainCombs: number = TOTAL_COMBS;
   private audioRoll = new Audio(roll);
 
   public closeModalEmitter: any;
@@ -152,7 +156,7 @@ export class GameController {
     // @ts-ignore
     this.drawController.setCanvasClickListener(this.canvasClickHandler);
     this.numberOfThrows = 2;
-    this.finishedVals = [];
+    this.remainCombs = TOTAL_COMBS;
   }
 
   finishMove(): void {
@@ -368,6 +372,7 @@ export class GameController {
           this.phase = 2;
         }
         this.finishMove();
+        this.remainCombs--;
         this.closeModalEmitter();
       }
     } else {
@@ -382,6 +387,10 @@ export class GameController {
         const points = this.calculateSum(cubeValues, evt.target.dataset.comb);
         selectedComb.value = this.numberOfThrows === 2 ? points * 2 : points;
         this.finishMove();
+        this.remainCombs--;
+
+        if (this.remainCombs === 0) {
+        }
         this.closeModalEmitter();
       }
     }
