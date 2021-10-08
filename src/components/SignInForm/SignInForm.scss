@@ -1,0 +1,26 @@
+.sign-in-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 75px 0;
+  width: 388px;
+  background-color: #c5a078;
+  border: 1px solid #000;
+  border-radius: 15px;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 214px;
+  }
+
+  &__title {
+    margin-bottom: 50px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 28px;
+    color: #000;
+  }
+}

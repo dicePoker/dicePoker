@@ -1,0 +1,31 @@
+.pause {
+  width: 792px;
+  padding: 104px 0 32px 0;
+  background-color: #9b6f37;
+  border-radius: 8px;
+
+  &__title {
+    margin-bottom: 70px;
+    font-size: 46px;
+    text-align: center;
+  }
+
+  &__button {
+    display: block;
+    margin: auto;
+    padding: 15px 23px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 24px;
+    color: #fff;
+    background-color: #704829;
+    border-radius: 4px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s;
+
+    &:hover,
+    &:focus {
+      background-color: #c5a078;
+    }
+  }
+}

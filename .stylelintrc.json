@@ -1,0 +1,16 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": ["stylelint-prettier"],
+  "rules": {
+    "prettier/prettier": true,
+    "color-hex-case": "lower",
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["for", "function", "if", "each", "include", "mixin"]
+      }
+    ],
+    "block-closing-brace-newline-after": "always-multi-line"
+  },
+  "ignoreFiles": ["./node_modules"]
+}
