@@ -52,7 +52,7 @@ export const SignUpForm = (): JSX.Element => {
 
   useEffect(() => {
     if (isAuth) {
-      history.push('/profile/');
+      history.push('/main/');
     }
   }, [isAuth]);
 

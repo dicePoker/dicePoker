@@ -4,21 +4,27 @@ import { DrawController } from '../../controllers/DrawController';
 import { GameController } from '../../controllers/GameController';
 import { Modal } from '@/components/Modal/Modal';
 import { Pause } from '@/components/Pause/Pause';
+import { withRouter } from 'react-router-dom';
 
 type State = {
   isShowModal: boolean;
 };
 
-export class MainPage extends PureComponent {
+type History = {
+  push: (path: string) => void;
+};
+
+class MainPage extends PureComponent {
   public state: State;
-  constructor(props: any) {
+  constructor(props: { history: History }) {
     super(props);
     this.state = {
       isShowModal: false,
     };
   }
   private drawController: DrawController | undefined;
-  private gameController = new GameController();
+  // @ts-ignore
+  private gameController = new GameController(this.props.history);
 
   private showModal(): void {
     this.setState(() => {
@@ -60,3 +66,6 @@ export class MainPage extends PureComponent {
     window.removeEventListener('blur', this.blurHandler.bind(this));
   }
 }
+
+// @ts-ignore
+export default withRouter(MainPage);

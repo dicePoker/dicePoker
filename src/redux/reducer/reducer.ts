@@ -62,6 +62,7 @@ const reducer = (state = initialState, action: ActionType): StateTypes => {
       };
 
     case ActionTypes.SET_GAME_RESULT:
+      console.log('SET_GAME_RESULT');
       return {
         ...state,
         gameResult: action.payload,

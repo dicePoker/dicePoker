@@ -3,10 +3,13 @@ import { getRandomCube } from '../utils/getRandomCube';
 import { cloneDeep } from 'lodash';
 import { setGameResult } from '@/redux/actions/actions';
 
+type History = {
+  push: (path: string) => void;
+};
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import roll from 'src/static/assets/audio/roll.wav';
-import { Dispatch } from 'react';
+import store from '@/redux/store';
 
 const TOTAL_CUBES = 5;
 
@@ -109,6 +112,7 @@ export interface PlayerResults {
 export class GameController {
   private drawController: DrawController | undefined;
   private selectedValues: number[];
+  private history: History;
   private currentVals: number[];
   private remainCombs: number = TOTAL_COMBS * 2;
   private audioRoll = new Audio(roll);
@@ -131,9 +135,10 @@ export class GameController {
   numberOfThrows = 2;
   public currentPlayer = 0;
   public phase = 1; // 1 или 2 - какая фаза игры идет
-  private dispatch: Dispatch<any> | undefined;
+  private dispatch = store.dispatch;
 
-  constructor() {
+  constructor(history: History) {
+    this.history = history;
     this.selectedValues = [];
     this.currentVals = [];
     this.canvasClickHandler = this.canvasClickHandler.bind(this);
@@ -238,53 +243,53 @@ export class GameController {
       case 'sixes':
         return (vals.filter(item => item === 6).length - 3) * 6;
       case 'pair':
-        {
-          const sorted = vals.sort();
-          for (let i = sorted.length - 1; i > 0; i--) {
-            if (sorted[i] === sorted[i - 1]) {
-              return sorted[i] * 2;
-            }
+      {
+        const sorted = vals.sort();
+        for (let i = sorted.length - 1; i > 0; i--) {
+          if (sorted[i] === sorted[i - 1]) {
+            return sorted[i] * 2;
           }
         }
+      }
         return 0;
       case 'pairs':
-        {
-          const sorted = vals.sort();
-          let firstVal = 0;
-          for (let i = sorted.length - 1; i > 0; i--) {
-            if (sorted[i] === sorted[i - 1]) {
-              if (!firstVal) {
-                firstVal = sorted[i];
-              } else {
-                return sorted[i] * 2 + firstVal * 2;
-              }
+      {
+        const sorted = vals.sort();
+        let firstVal = 0;
+        for (let i = sorted.length - 1; i > 0; i--) {
+          if (sorted[i] === sorted[i - 1]) {
+            if (!firstVal) {
+              firstVal = sorted[i];
+            } else {
+              return sorted[i] * 2 + firstVal * 2;
             }
           }
         }
+      }
         return 0;
       case 'sim3':
-        {
-          const sorted = vals.sort();
-          for (let i = sorted.length - 1; i > 1; i--) {
-            if (sorted[i] === sorted[i - 1] && sorted[i] === sorted[i - 2]) {
-              return sorted[i] * 3;
-            }
+      {
+        const sorted = vals.sort();
+        for (let i = sorted.length - 1; i > 1; i--) {
+          if (sorted[i] === sorted[i - 1] && sorted[i] === sorted[i - 2]) {
+            return sorted[i] * 3;
           }
         }
+      }
         return 0;
       case 'sim4':
-        {
-          const sorted = vals.sort();
-          for (let i = sorted.length - 1; i > 2; i--) {
-            if (
-              sorted[i] === sorted[i - 1] &&
-              sorted[i] === sorted[i - 2] &&
-              sorted[i] === sorted[i - 3]
-            ) {
-              return sorted[i] * 4;
-            }
+      {
+        const sorted = vals.sort();
+        for (let i = sorted.length - 1; i > 2; i--) {
+          if (
+            sorted[i] === sorted[i - 1] &&
+            sorted[i] === sorted[i - 2] &&
+            sorted[i] === sorted[i - 3]
+          ) {
+            return sorted[i] * 4;
           }
         }
+      }
         return 0;
       case 'poker':
         const val = vals[0];
@@ -295,50 +300,50 @@ export class GameController {
         }
         return val * 5;
       case 'fullHouse':
-        {
-          const sorted = vals.sort();
-          if (
-            (sorted[0] === sorted[1] &&
-              sorted[2] === sorted[3] &&
-              sorted[2] === sorted[4]) ||
-            (sorted[0] === sorted[1] &&
-              sorted[0] === sorted[2] &&
-              sorted[3] === sorted[4])
-          )
-            return vals.reduce((a, b) => a + b);
-        }
+      {
+        const sorted = vals.sort();
+        if (
+          (sorted[0] === sorted[1] &&
+            sorted[2] === sorted[3] &&
+            sorted[2] === sorted[4]) ||
+          (sorted[0] === sorted[1] &&
+            sorted[0] === sorted[2] &&
+            sorted[3] === sorted[4])
+        )
+          return vals.reduce((a, b) => a + b);
+      }
         return 0;
       case 'smallStraight':
-        {
-          const sorted = vals.sort();
-          for (let i = sorted.length - 1; i > 2; i--) {
-            if (
-              sorted[i] === sorted[i - 1] + 1 &&
-              sorted[i] === sorted[i - 2] + 2 &&
-              sorted[i] === sorted[i - 3] + 3
-            ) {
-              return sorted[i] + sorted[i - 1] + sorted[i - 2] + sorted[i - 3];
-            }
+      {
+        const sorted = vals.sort();
+        for (let i = sorted.length - 1; i > 2; i--) {
+          if (
+            sorted[i] === sorted[i - 1] + 1 &&
+            sorted[i] === sorted[i - 2] + 2 &&
+            sorted[i] === sorted[i - 3] + 3
+          ) {
+            return sorted[i] + sorted[i - 1] + sorted[i - 2] + sorted[i - 3];
           }
         }
+      }
         return 0;
       case 'bigStraight':
-        {
-          const sorted = vals.sort();
-          if (
-            (sorted[0] === 1 &&
-              sorted[1] === 2 &&
-              sorted[2] === 3 &&
-              sorted[3] === 4 &&
-              sorted[4] === 5) ||
-            (sorted[0] === 2 &&
-              sorted[1] === 3 &&
-              sorted[2] === 4 &&
-              sorted[3] === 5 &&
-              sorted[4] === 6)
-          )
-            return vals.reduce((a, b) => a + b);
-        }
+      {
+        const sorted = vals.sort();
+        if (
+          (sorted[0] === 1 &&
+            sorted[1] === 2 &&
+            sorted[2] === 3 &&
+            sorted[3] === 4 &&
+            sorted[4] === 5) ||
+          (sorted[0] === 2 &&
+            sorted[1] === 3 &&
+            sorted[2] === 4 &&
+            sorted[3] === 5 &&
+            sorted[4] === 6)
+        )
+          return vals.reduce((a, b) => a + b);
+      }
         return 0;
       case 'sum':
         return vals.reduce((a, b) => a + b);
@@ -356,7 +361,7 @@ export class GameController {
         this.currentPlayer
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-      ].firstPhasePoints.find(item => item.id === evt.target.dataset.comb);
+        ].firstPhasePoints.find(item => item.id === evt.target.dataset.comb);
       if (selectedComb && selectedComb.value === -200) {
         selectedComb.value = this.calculateSum(
           cubeValues,
@@ -383,7 +388,7 @@ export class GameController {
         this.currentPlayer
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-      ].secondPhasePoints.find(item => item.id === evt.target.dataset.comb);
+        ].secondPhasePoints.find(item => item.id === evt.target.dataset.comb);
       if (selectedComb && selectedComb.value === -200) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -392,9 +397,11 @@ export class GameController {
         this.finishMove();
         this.remainCombs--;
         this.closeModalEmitter();
+        console.log('this.remainCombs = ', this.remainCombs);
         if (this.remainCombs === 0) {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
+          console.log('попытка вызвать this.dispatch');
           this.dispatch(
             setGameResult({
               firstPlayer: {
@@ -407,6 +414,7 @@ export class GameController {
               },
             }),
           );
+          this.history.push('/gameover');
         }
       }
     }
@@ -460,10 +468,5 @@ export class GameController {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   setCloseModal(callback: () => void) {
     this.closeModalEmitter = callback;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  setDispatch(dispatch: Dispatch<any>) {
-    this.dispatch = dispatch;
   }
 }

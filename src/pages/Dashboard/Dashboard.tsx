@@ -7,8 +7,24 @@ import { StateTypes } from '../../redux/types';
 import { authorization } from '@/hoc/authorization';
 
 const Dashboard = (): JSX.Element => {
-  const usersData = useSelector((state: StateTypes) => state.users);
+  // const usersData = useSelector((state: StateTypes) => state.users);
+  const gameResult = useSelector((state: StateTypes) => state.gameResult);
   const dispatch = useDispatch();
+
+  const users = [
+    {
+      name: gameResult.firstPlayer.name,
+      rating: gameResult.firstPlayer.points,
+      id: null,
+      record: null,
+    },
+    {
+      name: gameResult.secondPlayer.name,
+      rating: gameResult.secondPlayer.points,
+      id: null,
+      record: null,
+    },
+  ];
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -28,13 +44,13 @@ const Dashboard = (): JSX.Element => {
         </ul>
       </div>
       <div className="dashboard__main-container">
-        {usersData.map(({ name, id, record, rating }) => (
-          <div key={id} className="dashboard__user-board">
-            <div className="dashboard__board-number">{id}</div>
+        {users.map(({ name, id, record, rating }, index) => (
+          <div key={id || index} className="dashboard__user-board">
+            {id && <div className="dashboard__board-number">{id}</div>}
             <div className="dashboard__board-avatar" />
             <p className="dashboard__user-info">{name}</p>
             <p className="dashboard__user-info">{rating}</p>
-            <p className="dashboard__user-info">{record}</p>
+            {record && <p className="dashboard__user-info">{record}</p>}
           </div>
         ))}
       </div>

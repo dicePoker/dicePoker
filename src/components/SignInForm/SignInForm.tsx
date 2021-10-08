@@ -35,7 +35,7 @@ export const SignInForm = (): JSX.Element => {
 
   useEffect(() => {
     if (isAuth) {
-      history.push('/profile/');
+      history.push('/main/');
     }
   }, [isAuth]);
 

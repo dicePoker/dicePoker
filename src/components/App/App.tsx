@@ -11,7 +11,7 @@ import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 import Loader from '../Loader';
 import { StateTypes } from '@/redux/types';
 import { useSelector } from 'react-redux';
-import { MainPage } from '@/pages/MainPage/MainPage';
+import MainPage from '@/pages/MainPage/MainPage';
 
 export const App = (): JSX.Element => {
   const loading = useSelector((state: StateTypes) => state.loading);
@@ -33,6 +33,7 @@ export const App = (): JSX.Element => {
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/forum" component={Forum} />
           <Route path="/profile" component={ProfilePage} />
+          <Route path="/gameover" component={GameOver} />
           <Redirect to={'/signin'} />
         </Switch>
       </div>
